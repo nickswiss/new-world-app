@@ -10,7 +10,10 @@ export function getEnvironment() {
   const hostname: string = window.location.hostname;
   if (hostname === "localhost") {
     return LOCAL;
-  } else if (hostname === "newworlddocs.com") {
+  } else if (
+    hostname === "www.newworlddocs.com" ||
+    hostname === "newworlddocs.com"
+  ) {
     return PROD;
   }
 }
