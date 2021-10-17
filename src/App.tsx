@@ -9,11 +9,11 @@ function App() {
   return (
     <Router>
       <Header />
-      <Container style={{ height: "90vh" }}>
+      <Container fluid style={{ height: "90vh" }}>
         <Switch>
           <Route exact path="/" component={Jon} />
           <Route exact path="/farming-routes/" component={FarmingRoute} />
-          <Route exact path="/farming-routes/:slug" component={FarmingRoute} />
+          <Route exact path="/farming-routes/:id" component={FarmingRoute} />
         </Switch>
       </Container>
     </Router>

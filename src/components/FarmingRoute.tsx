@@ -1,11 +1,18 @@
 import React from "react";
 import { Link, useRouteMatch } from "react-router-dom";
-import { Col, Container, ListGroup, Row } from "react-bootstrap";
-import map from "../images/map.png";
+import {
+  Button,
+  Col,
+  Container,
+  ListGroup,
+  Offcanvas,
+  Row,
+} from "react-bootstrap";
 import { RouteComponentProps } from "react-router";
-import { get } from "../api/config";
-import Topic from "./Topic";
+import { getInitializedApi } from "../api/config";
+import { Topic } from "./Topic";
 import { withRouter } from "react-router-dom";
+import { AxiosInstance, AxiosResponse } from "axios";
 const linkStyle = {
   margin: "1rem",
   textDecoration: "none",
@@ -28,43 +35,48 @@ function RoutingLink(params: any) {
 }
 
 interface FarmingRouteListRecord {
+  id: string;
   slug: string;
   heading: string;
 }
 
-class FarmingRoutes extends React.Component<RouteComponentProps, {}> {
+class FarmingRoutes extends React.Component<
+  RouteComponentProps,
+  {
+    routes: FarmingRouteListRecord[];
+    open: boolean;
+  }
+> {
   constructor(props: RouteComponentProps) {
     super(props);
+    this.state = { routes: [], open: false };
   }
 
   componentDidMount() {
-    get("farming-routes/?limit=10").then((resp) => {
-      console.log(resp);
-    });
+    let api: AxiosInstance = getInitializedApi();
+    api
+      .get<{
+        items: FarmingRouteListRecord[];
+      }>("farming-routes/?limit=10")
+      .then((response) => {
+        console.log(response);
+        this.setState({
+          routes: [...response.data.items],
+        });
+      });
   }
 
+  setShow = (open: boolean) => {
+    this.setState({ open: open });
+  };
+
+  handleClose = () => this.setShow(false);
+
+  handleShow = () => this.setShow(true);
+
   render() {
-    let routes: FarmingRouteListRecord[] = [
-      {
-        slug: "boats",
-        heading: "Boats",
-      },
-      {
-        slug: "hoes",
-        heading: "Hoes",
-      },
-      {
-        slug: "pb",
-        heading: "Peanut Butter",
-      },
-      {
-        slug: "jelly",
-        heading: "Jelly",
-      },
-    ];
-
-    let { slug }: { slug?: string } = this.props.match.params;
-
+    let { id }: { id?: string } = this.props.match.params;
+    let { open }: { open?: boolean } = this.state;
     return (
       <Container style={{ padding: 0, height: "100%" }}>
         <Row style={{ height: "100%" }}>
@@ -75,17 +87,19 @@ class FarmingRoutes extends React.Component<RouteComponentProps, {}> {
               >
                 <h5>Farming Routes</h5>
               </ListGroup.Item>
-              {routes.map((route) => (
+              {this.state.routes.map((route) => (
                 <RoutingLink
-                  to={"/farming-routes/" + route.slug}
+                  to={"/farming-routes/" + route.id}
                   heading={route.heading}
-                  active={route.slug === slug}
+                  active={route.id === id}
                 />
               ))}
               <ListGroup.Item style={{ height: "100%" }} />
             </ListGroup>
           </Col>
-          <Col xs={9}>{slug && <Topic slug={slug} />}</Col>
+          <Col style={{ height: "100%", overflow: "auto" }} xs={9}>
+            {id && <Topic id={id} />}
+          </Col>
         </Row>
       </Container>
     );

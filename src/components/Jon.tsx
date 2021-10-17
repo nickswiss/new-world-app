@@ -1,5 +1,5 @@
 import React from "react";
-import tarkov_sweat from "../images/tarkov_sweat.png";
+import tarkov_sweat from "../images/media/jon/tarkov_sweat.png";
 import { Col, Container, Row } from "react-bootstrap";
 
 function Jon() {
