@@ -1,19 +1,11 @@
 import React from "react";
-import { Link, useRouteMatch } from "react-router-dom";
-import {
-  Button,
-  Card,
-  Col,
-  Container,
-  ListGroup,
-  Offcanvas,
-  Row,
-} from "react-bootstrap";
+import { Link } from "react-router-dom";
+import { Col, Container, ListGroup, Row } from "react-bootstrap";
 import { RouteComponentProps } from "react-router";
 import { getInitializedApi } from "../api/config";
 import { Topic } from "./Topic";
 import { withRouter } from "react-router-dom";
-import { AxiosInstance, AxiosResponse } from "axios";
+import { AxiosInstance } from "axios";
 const linkStyle = {
   textDecoration: "none",
   color: "blue",
@@ -78,7 +70,6 @@ class FarmingRoutes extends React.Component<
 
   render() {
     let { id }: { id?: string } = this.props.match.params;
-    let { open }: { open?: boolean } = this.state;
     return (
       <Container style={{ padding: 0, height: "100%" }}>
         <Row
@@ -87,7 +78,8 @@ class FarmingRoutes extends React.Component<
         >
           <Col
             className="flex-column sticky-sm-top"
-            xs={3}
+            sm={12}
+            md={3}
             style={{ height: "100%", borderStyle: "none" }}
           >
             <ListGroup
@@ -120,7 +112,8 @@ class FarmingRoutes extends React.Component<
               backgroundColor: "white",
               borderRadius: 0,
             }}
-            xs={9}
+            sm={12}
+            md={9}
           >
             {id && <Topic id={id} />}
           </Col>

@@ -1,11 +1,4 @@
-import {
-  Card,
-  Col,
-  Container,
-  ListGroup,
-  ListGroupItem,
-  Row,
-} from "react-bootstrap";
+import { Card, Col, Row } from "react-bootstrap";
 import React from "react";
 import { AxiosInstance } from "axios";
 import { getInitializedApi } from "../api/config";
@@ -22,14 +15,6 @@ interface FarmingRouteDetailRecord {
   map_image_url: string;
   resources: ResourceQuantityItem;
 }
-
-const TopicHeading = ({ heading }: { heading: string }) => (
-  <Row>
-    <Col md={4} style={{ paddingTop: "2vh" }}>
-      <h3>{heading}</h3>
-    </Col>
-  </Row>
-);
 
 interface TopicProps {
   id: string;
@@ -84,10 +69,10 @@ export class Topic extends React.Component<TopicProps, TopicState> {
       id,
       heading,
       content,
-      resources,
-      images,
-      videos,
-    }: {
+    }: // resources,
+    // images,
+    // videos,
+    {
       id?: string;
       heading?: string;
       content?: string;
@@ -108,7 +93,7 @@ export class Topic extends React.Component<TopicProps, TopicState> {
               margin: 0,
             }}
           >
-            Card Title
+            Last Stand Life Motes
           </Card.Title>
           <Card.Body style={{ backgroundColor: "var(--light)" }}>
             <Row>
@@ -127,13 +112,13 @@ export class Topic extends React.Component<TopicProps, TopicState> {
                     backgroundColor: "white",
                     padding: "1vh",
                     borderRadius: 2,
-                    height: "40vh",
                   }}
                 >
                   <img
+                    alt={""}
                     style={{
-                      height: "100%",
-                      width: "auto",
+                      width: "100%",
+                      height: "auto%",
                     }}
                     src={
                       "https://media.newworlddocs.com/media/farming-routes/last-stand-life-motes/route.png"
@@ -155,6 +140,7 @@ export class Topic extends React.Component<TopicProps, TopicState> {
                 >
                   <iframe
                     style={{
+                      width: "100%",
                       height: "100%",
                     }}
                     src="https://www.youtube.com/embed/0y4GdFhM9Fc"

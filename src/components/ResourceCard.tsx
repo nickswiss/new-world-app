@@ -1,16 +1,5 @@
 import React from "react";
-import { ResourceQuantityItem } from "./Topic";
-import {
-  Button,
-  Card,
-  Col,
-  Container,
-  ListGroup,
-  ListGroupItem,
-  OverlayTrigger,
-  Popover,
-  Row,
-} from "react-bootstrap";
+import { Card, Col, Row } from "react-bootstrap";
 import { getMediaDomain } from "../api/config";
 
 export interface Icon {
@@ -41,26 +30,22 @@ export function getIcon(resource: string): Icon {
       };
   }
 }
+//
+// const popover = (
+//   <Popover id="popover-basic">
+//     <Popover.Header as="h3">Popover right</Popover.Header>
+//     <Popover.Body>
+//       And here's some <strong>amazing</strong> content. It's very engaging.
+//       right?
+//     </Popover.Body>
+//   </Popover>
+// );
 
-interface ResourceDashboardProps {
-  resources: ResourceQuantityItem[];
-}
-
-const popover = (
-  <Popover id="popover-basic">
-    <Popover.Header as="h3">Popover right</Popover.Header>
-    <Popover.Body>
-      And here's some <strong>amazing</strong> content. It's very engaging.
-      right?
-    </Popover.Body>
-  </Popover>
-);
-
-const Example = () => (
-  <OverlayTrigger trigger="click" placement="right" overlay={popover}>
-    <Button variant="success">Click me to see</Button>
-  </OverlayTrigger>
-);
+// const Example = () => (
+//   <OverlayTrigger trigger="click" placement="right" overlay={popover}>
+//     <Button variant="success">Click me to see</Button>
+//   </OverlayTrigger>
+// );
 
 class Item extends React.Component<{ resource: string }, any> {
   constructor(props: { resource: string }) {
@@ -69,15 +54,18 @@ class Item extends React.Component<{ resource: string }, any> {
   }
 
   render() {
-    let collapsed: boolean = true;
     let icon: Icon = getIcon(this.props.resource);
-    let cardDisplay: string = this.state.imageLoaded ? "inline" : "none";
+    let cardStyle: any = {
+      padding: "10px",
+      borderStyle: "none",
+    };
     return (
       <Card
         className={"justify-content-md-center align-items-md-center"}
-        style={{ padding: "10px", borderStyle: "none" }}
+        style={cardStyle}
       >
         <img
+          alt={""}
           style={{
             width: "100px",
             height: "80px",
@@ -86,12 +74,7 @@ class Item extends React.Component<{ resource: string }, any> {
             backgroundSize: "cover",
             backgroundRepeat: "no-repeat",
           }}
-          onLoad={() => {
-            console.log(this.state);
-            this.setState({ imageLoaded: true });
-          }}
         />
-
         <h6 style={{ fontSize: "0.8vw" }}>{icon.name}</h6>
       </Card>
     );
@@ -99,7 +82,6 @@ class Item extends React.Component<{ resource: string }, any> {
 }
 
 export const ResourceCard = () => {
-  let defaultStyle: any = {};
   return (
     <Card
       className={"light-shadow card-1"}

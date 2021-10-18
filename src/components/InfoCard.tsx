@@ -2,7 +2,6 @@ import React from "react";
 import { Card, Col, Row } from "react-bootstrap";
 
 const InfoCard = () => {
-  let defaultStyle: any = {};
   return (
     <Card
       className={"light-shadow card-1"}

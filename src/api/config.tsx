@@ -1,4 +1,4 @@
-import axios, { AxiosInstance, AxiosResponse } from "axios";
+import axios, { AxiosInstance } from "axios";
 
 const LOCAL: string = "LOCAL";
 const PROD: string = "PROD";
