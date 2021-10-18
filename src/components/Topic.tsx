@@ -103,8 +103,28 @@ export class Topic extends React.Component<TopicProps, TopicState> {
           >
             Card Title
           </Card.Title>
-          <Card.Body style={{ backgroundColor: "var(--white)" }}></Card.Body>
-          <Card.Body style={{ backgroundColor: "var(--dark)" }}>
+          <Card.Body style={{ backgroundColor: "white" }}>
+            <Row>
+              <Col xs={12} md={6}>
+                <Card
+                  className={"card-2"}
+                  style={{
+                    backgroundColor: "white",
+                    color: "black",
+                    borderRadius: 2,
+                    borderStyle: "none",
+                    padding: "1vh",
+                  }}
+                >
+                  <Card.Title>Resources</Card.Title>
+                </Card>
+              </Col>
+              <Col xs={12} md={6}>
+                <Card style={{ backgroundColor: "white" }}></Card>
+              </Col>
+            </Row>
+          </Card.Body>
+          <Card.Body style={{ backgroundColor: "var(--light)" }}>
             <iframe
               style={{
                 width: "100%",
