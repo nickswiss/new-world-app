@@ -97,24 +97,25 @@ export class Topic extends React.Component<TopicProps, TopicState> {
           </Card.Title>
           <Card.Body style={{ backgroundColor: "var(--light)" }}>
             <Row>
-              <Col xs={12} md={6}>
+              <Col xs={12} md={8}>
                 <ResourceCard />
               </Col>
-              <Col xs={12} md={6}>
+              <Col xs={12} md={4}>
                 <InfoCard />
               </Col>
             </Row>
             <Row style={{ paddingTop: "1vh" }}>
               <Col xs={12} md={12}>
                 <Card
-                  className={"light-shadow card-1"}
                   style={{
-                    backgroundColor: "white",
+                    backgroundColor: "transparent",
+                    borderStyle: "none",
                     padding: "1vh",
                     borderRadius: 2,
                   }}
                 >
                   <img
+                    className={"card-1"}
                     alt={""}
                     style={{
                       width: "100%",
@@ -130,15 +131,16 @@ export class Topic extends React.Component<TopicProps, TopicState> {
             <Row style={{ paddingTop: "1vh" }}>
               <Col xs={12} md={12}>
                 <Card
-                  className={"light-shadow card-1"}
                   style={{
-                    backgroundColor: "white",
+                    backgroundColor: "transparent",
+                    borderStyle: "none",
                     padding: "1vh",
                     borderRadius: 2,
                     height: "40vh",
                   }}
                 >
                   <iframe
+                    className={"card-1"}
                     style={{
                       width: "100%",
                       height: "100%",

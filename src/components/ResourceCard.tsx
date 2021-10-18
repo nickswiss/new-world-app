@@ -1,5 +1,5 @@
 import React from "react";
-import { Card, Col, Row } from "react-bootstrap";
+import { Card, Col, Row, Table } from "react-bootstrap";
 import { getMediaDomain } from "../api/config";
 
 export interface Icon {
@@ -67,41 +67,90 @@ class Item extends React.Component<{ resource: string }, any> {
         <img
           alt={""}
           style={{
-            width: "100px",
-            height: "80px",
+            width: "60px",
+            height: "48px",
             backgroundImage: `url(${icon.src_dir}/thumb.png`,
             backgroundPosition: "center",
             backgroundSize: "cover",
             backgroundRepeat: "no-repeat",
           }}
         />
-        <h6 style={{ fontSize: "0.8vw" }}>{icon.name}</h6>
+        <h6 style={{ fontSize: "14px" }}>{icon.name}</h6>
       </Card>
     );
   }
 }
+
+export const ResourceTable = () => {
+  return (
+    <Table className={"card-1"} variant={"dark"} striped bordered hover>
+      <thead>
+        <tr>
+          <th></th>
+          <th>Item</th>
+          <th>Quantity</th>
+          <th>Req</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>
+            {" "}
+            <img
+              src={`https://media.newworlddocs.com/media/icons/life-mote/thumb.png`}
+              style={{
+                width: "60px",
+                height: "48px",
+              }}
+            />
+          </td>
+          <td>Life Mote</td>
+          <td>300+</td>
+          <td>150 Harvesting</td>
+        </tr>
+        <tr>
+          <td>
+            {" "}
+            <img
+              src={`https://media.newworlddocs.com/media/icons/life-moth/thumb.png`}
+              style={{
+                width: "60px",
+                height: "48px",
+              }}
+            />
+          </td>
+          <td>Life Moth</td>
+          <td>300+</td>
+          <td>150 Harvesting</td>
+        </tr>
+      </tbody>
+    </Table>
+  );
+};
 
 export const ResourceCard = () => {
   return (
     <Card
       className={"light-shadow card-1"}
       style={{
-        backgroundColor: "white",
-        color: "black",
+        backgroundColor: "var(--primary)",
+        color: "white",
         borderRadius: 2,
         padding: "1vh",
-        fontFamily: "Roboto",
-        height: "15vh",
+        fontFamily: "Roboto Mono",
       }}
     >
       <Card.Title>Resources</Card.Title>
       <Row>
-        <Col xs={4}>
-          <Item resource={"life_mote"} />
-        </Col>{" "}
-        <Col xs={4}>
-          <Item resource={"life_moth"} />
-        </Col>{" "}
+        <Col xs={12} style={{ padding: "1vh" }}>
+          <ResourceTable />
+        </Col>
+        {/*<Col xs={4}>*/}
+        {/*  <Item resource={"life_mote"} />*/}
+        {/*</Col>{" "}*/}
+        {/*<Col xs={4}>*/}
+        {/*  <Item resource={"life_moth"} />*/}
+        {/*</Col>{" "}*/}
       </Row>
     </Card>
   );
