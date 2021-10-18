@@ -1,9 +1,16 @@
-import { Card, Col, Container, Row } from "react-bootstrap";
+import {
+  Card,
+  Col,
+  Container,
+  ListGroup,
+  ListGroupItem,
+  Row,
+} from "react-bootstrap";
 import React from "react";
-import map from "../images/map.png";
 import { AxiosInstance } from "axios";
 import { getInitializedApi } from "../api/config";
-import ResourceDashboard from "./ResourceDashboard";
+import ResourceCard from "./ResourceCard";
+import InfoCard from "./InfoCard";
 
 interface FarmingRouteDetailRecord {
   id: string;
@@ -103,24 +110,13 @@ export class Topic extends React.Component<TopicProps, TopicState> {
           >
             Card Title
           </Card.Title>
-          <Card.Body style={{ backgroundColor: "white" }}>
+          <Card.Body style={{ backgroundColor: "var(--light)" }}>
             <Row>
               <Col xs={12} md={6}>
-                <Card
-                  className={"card-2"}
-                  style={{
-                    backgroundColor: "white",
-                    color: "black",
-                    borderRadius: 2,
-                    borderStyle: "none",
-                    padding: "1vh",
-                  }}
-                >
-                  <Card.Title>Resources</Card.Title>
-                </Card>
+                <ResourceCard />
               </Col>
               <Col xs={12} md={6}>
-                <Card style={{ backgroundColor: "white" }}></Card>
+                <InfoCard />
               </Col>
             </Row>
           </Card.Body>

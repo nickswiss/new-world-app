@@ -35,7 +35,7 @@ export const getMediaDomain = () => {
   if (env === PROD) {
     return "https://media.newworlddocs.com";
   }
-  return "https://dev-media.newworlddocs.com";
+  return "https://media.newworlddocs.com";
 };
 
 export const getInitializedApi = (): AxiosInstance => {
