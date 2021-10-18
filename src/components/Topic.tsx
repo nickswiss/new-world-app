@@ -122,7 +122,7 @@ export class Topic extends React.Component<TopicProps, TopicState> {
             <Row style={{ paddingTop: "1vh" }}>
               <Col xs={12} md={12}>
                 <Card
-                  className={"light-shadow"}
+                  className={"light-shadow card-1"}
                   style={{
                     backgroundColor: "white",
                     padding: "1vh",
@@ -145,7 +145,7 @@ export class Topic extends React.Component<TopicProps, TopicState> {
             <Row style={{ paddingTop: "1vh" }}>
               <Col xs={12} md={12}>
                 <Card
-                  className={"light-shadow"}
+                  className={"light-shadow card-1"}
                   style={{
                     backgroundColor: "white",
                     padding: "1vh",

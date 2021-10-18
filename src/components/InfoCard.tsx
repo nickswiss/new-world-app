@@ -5,7 +5,7 @@ const InfoCard = () => {
   let defaultStyle: any = {};
   return (
     <Card
-      className={"light-shadow "}
+      className={"light-shadow card-1"}
       style={{
         backgroundColor: "white",
         color: "black",
