@@ -119,27 +119,40 @@ export class Topic extends React.Component<TopicProps, TopicState> {
                 <InfoCard />
               </Col>
             </Row>
+            <Row style={{ paddingTop: "1vh" }}>
+              <Col xs={12} md={12}>
+                <Card style={{ backgroundColor: "white", padding: "1vh" }}>
+                  <img
+                    src={
+                      "https://media.newworlddocs.com/media/farming-routes/last-stand-life-motes/route.png"
+                    }
+                  />
+                </Card>
+              </Col>
+            </Row>
+            <Row style={{ paddingTop: "1vh" }}>
+              <Col xs={12} md={12}>
+                <Card
+                  style={{
+                    backgroundColor: "white",
+                    padding: "1vh",
+                    height: "50vh",
+                  }}
+                >
+                  <iframe
+                    style={{
+                      height: "100%",
+                    }}
+                    src="https://www.youtube.com/embed/0y4GdFhM9Fc"
+                    title="YouTube video player"
+                    frameBorder="0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowFullScreen
+                  ></iframe>
+                </Card>
+              </Col>
+            </Row>
           </Card.Body>
-          <Card.Body style={{ backgroundColor: "var(--light)" }}>
-            <iframe
-              style={{
-                width: "100%",
-                height: "auto",
-              }}
-              src="https://www.youtube.com/embed/8TlbYm-Enzc"
-              title="YouTube video player"
-              frameBorder="0"
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-              allowFullScreen
-            ></iframe>
-          </Card.Body>
-          <Card.Body style={{ backgroundColor: "white" }}>
-            <Card.Text>
-              Some quick example text to build on the card title and make up the
-              bulk of the card's content.
-            </Card.Text>
-          </Card.Body>
-          <div style={{ backgroundColor: "var(--light)", height: "10px" }} />
         </Card>
       );
     } else {

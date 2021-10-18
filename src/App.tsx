@@ -12,7 +12,7 @@ function App() {
       <Router>
         <Header />
         <Switch>
-          <Route exact path="/" component={Jon} />
+          <Route exact path="/jon" component={Jon} />
           <Route exact path="/farming-routes/" component={FarmingRoute} />
           <Route exact path="/farming-routes/:id" component={FarmingRoute} />
         </Switch>
