@@ -121,8 +121,20 @@ export class Topic extends React.Component<TopicProps, TopicState> {
             </Row>
             <Row style={{ paddingTop: "1vh" }}>
               <Col xs={12} md={12}>
-                <Card style={{ backgroundColor: "white", padding: "1vh" }}>
+                <Card
+                  className={"light-shadow"}
+                  style={{
+                    backgroundColor: "white",
+                    padding: "1vh",
+                    borderRadius: 2,
+                    height: "40vh",
+                  }}
+                >
                   <img
+                    style={{
+                      height: "100%",
+                      width: "auto",
+                    }}
                     src={
                       "https://media.newworlddocs.com/media/farming-routes/last-stand-life-motes/route.png"
                     }
@@ -133,10 +145,12 @@ export class Topic extends React.Component<TopicProps, TopicState> {
             <Row style={{ paddingTop: "1vh" }}>
               <Col xs={12} md={12}>
                 <Card
+                  className={"light-shadow"}
                   style={{
                     backgroundColor: "white",
                     padding: "1vh",
-                    height: "50vh",
+                    borderRadius: 2,
+                    height: "40vh",
                   }}
                 >
                   <iframe

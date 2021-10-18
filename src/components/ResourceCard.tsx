@@ -1,6 +1,5 @@
 import React from "react";
 import { ResourceQuantityItem } from "./Topic";
-import iron_ore from "../images/media/icons/iron_ore.png";
 import {
   Button,
   Card,
@@ -15,8 +14,7 @@ import {
 import { getMediaDomain } from "../api/config";
 
 export interface Icon {
-  src_thumb: string;
-  src_desc: string;
+  src_dir: string;
   name: string;
 }
 
@@ -25,18 +23,21 @@ export const ICON_DIRECTORY: string = `${MEDIA_SERVER}/media/icons`;
 
 export function getIcon(resource: string): Icon {
   switch (resource) {
-    case "earth_mote":
+    case "life_mote":
       return {
-        src_thumb: `${ICON_DIRECTORY}/Earth_mote_thumb.PNG`,
-        src_desc: `${ICON_DIRECTORY}/Earth_mote_descrip.PNG`,
-        name: "Earth Mote",
+        src_dir: `${ICON_DIRECTORY}/life-mote`,
+        name: "Life Mote",
+      };
+    case "life_moth":
+      return {
+        src_dir: `${ICON_DIRECTORY}/life-moth`,
+        name: "Life Moth",
       };
 
     default:
       return {
-        src_thumb: `${ICON_DIRECTORY}/Earth_mote_thumb.PNG`,
-        src_desc: `${ICON_DIRECTORY}/Earth_mote_descrip.PNG`,
-        name: "Earth Mote",
+        src_dir: `${ICON_DIRECTORY}/life-mote`,
+        name: "Life Mote",
       };
   }
 }
@@ -79,8 +80,8 @@ class Item extends React.Component<{ resource: string }, any> {
         <img
           style={{
             width: "100px",
-            height: "72px",
-            backgroundImage: "url(" + icon.src_thumb + ")",
+            height: "80px",
+            backgroundImage: `url(${icon.src_dir}/thumb.png`,
             backgroundPosition: "center",
             backgroundSize: "cover",
             backgroundRepeat: "no-repeat",
@@ -101,26 +102,24 @@ export const ResourceCard = () => {
   let defaultStyle: any = {};
   return (
     <Card
-      className={"light-shadow "}
+      className={"light-shadow"}
       style={{
         backgroundColor: "white",
         color: "black",
         borderRadius: 2,
         padding: "1vh",
         fontFamily: "Roboto",
+        height: "15vh",
       }}
     >
       <Card.Title>Resources</Card.Title>
       <Row>
         <Col xs={4}>
-          <Item resource={"earth_mote"} />
+          <Item resource={"life_mote"} />
         </Col>{" "}
         <Col xs={4}>
-          <Item resource={"earth_mote"} />
+          <Item resource={"life_moth"} />
         </Col>{" "}
-        <Col xs={4}>
-          <Item resource={"earth_mote"} />
-        </Col>
       </Row>
     </Card>
   );
