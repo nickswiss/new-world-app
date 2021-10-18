@@ -1,5 +1,10 @@
 import React from "react";
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Route,
+  Switch,
+  Redirect,
+} from "react-router-dom";
 import Header from "./components/Header";
 import FarmingRoute from "./components/FarmingRoute";
 import Jon from "./components/Jon";
@@ -12,6 +17,8 @@ function App() {
       <Router>
         <Header />
         <Switch>
+          {" "}
+          <Redirect from="/" to="/farming-routes/last-stand-life-motes" />
           <Route exact path="/jon" component={Jon} />
           <Route exact path="/farming-routes/" component={FarmingRoute} />
           <Route exact path="/farming-routes/:id" component={FarmingRoute} />
