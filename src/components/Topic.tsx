@@ -90,67 +90,41 @@ export class Topic extends React.Component<TopicProps, TopicState> {
     } = this.state;
     if (!!id && !!heading && !!content) {
       return (
-        <Row>
-          {resources && <ResourceDashboard resources={resources} />}
-          <Container style={{ paddingLeft: "0", paddingTop: "2vh" }}>
-            <Card>
-              <Card.Title
-                style={{
-                  paddingTop: "2vh",
-                  paddingLeft: "2vh",
-                  paddingRight: "2vh",
-                }}
-              >
-                <h3>{"Route"}</h3>
-              </Card.Title>
-              {images &&
-                images.map((image) => {
-                  return (
-                    <Container>
-                      <Col
-                        md={9}
-                        style={{
-                          textAlign: "center",
-                          width: "100%",
-                        }}
-                      >
-                        <img
-                          style={{
-                            maxWidth: "100%",
-                            height: "auto",
-                          }}
-                          src={image.url}
-                          alt="map"
-                        />
-                      </Col>
-                    </Container>
-                  );
-                })}
-              {videos &&
-                videos.map((video) => (
-                  <Container style={{ paddingLeft: 0, padding: "1vh" }}>
-                    <iframe
-                      style={{
-                        width: "100%",
-                        height: "35vh",
-                      }}
-                      src={video.url}
-                      title={video.name}
-                      frameBorder="0"
-                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                      allowFullScreen
-                    />
-                  </Container>
-                ))}
-            </Card>
-          </Container>
-
-          <Row className="justify-content-md-center">
-            <Col md={9} style={{ paddingTop: "2vh", textAlign: "center" }}>
-              <p>{content}</p>
-            </Col>
-          </Row>
-        </Row>
+        <Card style={{ borderRadius: 0, borderStyle: "none" }}>
+          <div style={{ backgroundColor: "#0039cb", height: "3px" }} />
+          <Card.Title
+            style={{
+              backgroundColor: "#2962ff",
+              fontFamily: "Roboto Mono",
+              color: "white",
+              padding: "1vh",
+              margin: 0,
+            }}
+          >
+            Card Title
+          </Card.Title>
+          <Card.Body style={{ backgroundColor: "var(--white)" }}></Card.Body>
+          <Card.Body style={{ backgroundColor: "var(--dark)" }}>
+            <iframe
+              style={{
+                width: "100%",
+                height: "auto",
+              }}
+              src="https://www.youtube.com/embed/8TlbYm-Enzc"
+              title="YouTube video player"
+              frameBorder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowFullScreen
+            ></iframe>
+          </Card.Body>
+          <Card.Body style={{ backgroundColor: "white" }}>
+            <Card.Text>
+              Some quick example text to build on the card title and make up the
+              bulk of the card's content.
+            </Card.Text>
+          </Card.Body>
+          <div style={{ backgroundColor: "var(--light)", height: "10px" }} />
+        </Card>
       );
     } else {
       return <div>loading</div>;

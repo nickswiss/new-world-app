@@ -4,11 +4,14 @@ import { LinkContainer } from "react-router-bootstrap";
 
 const Header = () => {
   return (
-    <Container>
-      <Navbar bg="dark" variant="dark">
+    <Container fluid className={"p-0"}>
+      <Navbar
+        variant={"dark"}
+        style={{ fontFamily: "Roboto Mono", backgroundColor: "#2962ff" }}
+      >
         <Container>
           <LinkContainer to="/farming-routes">
-            <Navbar.Brand>New World Docs :)</Navbar.Brand>
+            <Navbar.Brand>New World Docs</Navbar.Brand>
           </LinkContainer>
           <Nav className="me-auto">
             <LinkContainer to="/farming-routes">

@@ -2,6 +2,7 @@ import React from "react";
 import { Link, useRouteMatch } from "react-router-dom";
 import {
   Button,
+  Card,
   Col,
   Container,
   ListGroup,
@@ -14,9 +15,10 @@ import { Topic } from "./Topic";
 import { withRouter } from "react-router-dom";
 import { AxiosInstance, AxiosResponse } from "axios";
 const linkStyle = {
-  margin: "1rem",
   textDecoration: "none",
   color: "blue",
+  fontSize: "1vw",
+  fontFamily: "Roboto Mono",
 };
 
 function RoutingLink(params: any) {
@@ -79,13 +81,26 @@ class FarmingRoutes extends React.Component<
     let { open }: { open?: boolean } = this.state;
     return (
       <Container style={{ padding: 0, height: "100%" }}>
-        <Row style={{ height: "100%" }}>
-          <Col className="flex-column" xs={3} style={{ height: "100%" }}>
-            <ListGroup style={{ height: "100%" }}>
+        <Row
+          className={"align-items-md-start"}
+          style={{ padding: "1vh", borderStyle: "none" }}
+        >
+          <Col
+            className="flex-column sticky-sm-top"
+            xs={3}
+            style={{ height: "100%", borderStyle: "none" }}
+          >
+            <ListGroup
+              className="card-2"
+              style={{ borderRadius: 0, borderStyle: "none" }}
+            >
               <ListGroup.Item
-                style={{ paddingTop: "5vh", paddingBottom: "5vh" }}
+                style={{
+                  fontSize: "1vw",
+                  fontFamily: "Roboto Mono",
+                }}
               >
-                <h5>Farming Routes</h5>
+                <p>Farming Routes</p>
               </ListGroup.Item>
               {this.state.routes.map((route) => (
                 <RoutingLink
@@ -97,7 +112,16 @@ class FarmingRoutes extends React.Component<
               <ListGroup.Item style={{ height: "100%" }} />
             </ListGroup>
           </Col>
-          <Col style={{ height: "100%", overflow: "auto" }} xs={9}>
+
+          <Col
+            className={"card-2"}
+            style={{
+              padding: 0,
+              backgroundColor: "white",
+              borderRadius: 0,
+            }}
+            xs={9}
+          >
             {id && <Topic id={id} />}
           </Col>
         </Row>

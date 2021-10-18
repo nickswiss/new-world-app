@@ -4,19 +4,20 @@ import Header from "./components/Header";
 import FarmingRoute from "./components/FarmingRoute";
 import Jon from "./components/Jon";
 import { Container } from "react-bootstrap";
+import "./App.css";
 
 function App() {
   return (
-    <Router>
-      <Header />
-      <Container fluid style={{ height: "90vh" }}>
+    <Container fluid className={"p-0"}>
+      <Router>
+        <Header />
         <Switch>
           <Route exact path="/" component={Jon} />
           <Route exact path="/farming-routes/" component={FarmingRoute} />
           <Route exact path="/farming-routes/:id" component={FarmingRoute} />
         </Switch>
-      </Container>
-    </Router>
+      </Router>
+    </Container>
   );
 }
 
