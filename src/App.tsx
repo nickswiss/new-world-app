@@ -18,7 +18,6 @@ function App() {
         <Header />
         <Switch>
           {" "}
-          <Redirect from="/" to="/farming-routes/last-stand-life-motes" />
           <Route exact path="/jon" component={Jon} />
           <Route exact path="/farming-routes/" component={FarmingRoute} />
           <Route exact path="/farming-routes/:id" component={FarmingRoute} />
