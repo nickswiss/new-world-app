@@ -1,6 +1,5 @@
 import React from "react";
 import {
-  Button,
   Card,
   Col,
   OverlayTrigger,
@@ -39,16 +38,6 @@ export function getIcon(resource: string): Icon {
   }
 }
 
-const PopOverDetail = ({ detail }: { detail: string }) => (
-  <Popover id="pop-basic">
-    <Popover.Header as="h3">Popover right</Popover.Header>
-    <Popover.Body>
-      And here's some <strong>amazing</strong> content. It's very engaging.
-      right?
-    </Popover.Body>
-  </Popover>
-);
-
 class Item extends React.Component<{ resource: string }, any> {
   constructor(props: { resource: string }) {
     super(props);
@@ -66,7 +55,9 @@ class Item extends React.Component<{ resource: string }, any> {
             overlay={
               <Popover id={`popover-positioned-right`}>
                 <img
+                  alt={""}
                   style={{
+                    borderStyle: "none",
                     maxHeight: "20vh",
                   }}
                   src={`${this.props.resource}/detail.png`}
@@ -75,6 +66,7 @@ class Item extends React.Component<{ resource: string }, any> {
             }
           >
             <img
+              alt={""}
               style={{ width: "60px", height: "48px" }}
               src={`${this.props.resource}/thumb.png`}
             />
@@ -129,6 +121,7 @@ export const ResourceCard = () => {
         borderRadius: 2,
         padding: "1vh",
         fontFamily: "Roboto Mono",
+        textAlign: "center",
       }}
     >
       <Card.Title>Resources</Card.Title>

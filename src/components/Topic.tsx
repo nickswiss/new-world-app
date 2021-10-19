@@ -107,13 +107,18 @@ export class Topic extends React.Component<TopicProps, TopicState> {
             <Row style={{ paddingTop: "1vh" }}>
               <Col xs={12} md={12}>
                 <Card
+                  className={"card-1"}
                   style={{
-                    backgroundColor: "transparent",
+                    backgroundColor: "var(--primary)",
                     borderStyle: "none",
                     padding: "1vh",
                     borderRadius: 2,
+                    color: "white",
+                    fontFamily: "Roboto Mono",
+                    textAlign: "center",
                   }}
                 >
+                  <Card.Title>Route</Card.Title>
                   <img
                     className={"card-1"}
                     alt={""}
@@ -126,17 +131,17 @@ export class Topic extends React.Component<TopicProps, TopicState> {
                     }
                   />
                 </Card>
-              </Col>
-            </Row>
-            <Row style={{ paddingTop: "1vh" }}>
-              <Col xs={12} md={12}>
                 <Card
+                  className={"card-1"}
                   style={{
-                    backgroundColor: "transparent",
+                    backgroundColor: "var(--primary)",
                     borderStyle: "none",
                     padding: "1vh",
                     borderRadius: 2,
+                    color: "white",
+                    fontFamily: "Roboto Mono",
                     height: "40vh",
+                    textAlign: "center",
                   }}
                 >
                   <iframe
@@ -153,6 +158,9 @@ export class Topic extends React.Component<TopicProps, TopicState> {
                   ></iframe>
                 </Card>
               </Col>
+            </Row>
+            <Row style={{ paddingTop: "1vh" }}>
+              <Col xs={12} md={12}></Col>
             </Row>
           </Card.Body>
         </Card>
