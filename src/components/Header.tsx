@@ -17,9 +17,6 @@ const Header = () => {
             <LinkContainer to="/farming-routes">
               <Nav.Link>Farming Routes</Nav.Link>
             </LinkContainer>
-            <LinkContainer exact to="/jon">
-              <Nav.Link>Jon</Nav.Link>
-            </LinkContainer>
           </Nav>
         </Container>
       </Navbar>
