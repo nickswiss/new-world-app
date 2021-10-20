@@ -7,7 +7,7 @@ const Header = () => {
     <Container fluid className={"p-0"}>
       <Navbar
         variant={"dark"}
-        style={{ fontFamily: "Roboto Mono", backgroundColor: "#2962ff" }}
+        style={{ fontFamily: "Roboto Mono", backgroundColor: "var(--primary)" }}
       >
         <Container>
           <LinkContainer to="/farming-routes">

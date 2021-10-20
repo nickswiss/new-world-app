@@ -8,6 +8,7 @@ import {
   Table,
 } from "react-bootstrap";
 import { getMediaDomain } from "../api/config";
+import DisplayIcon from "./DisplayIcon";
 
 export interface Icon {
   src_dir: string;
@@ -38,45 +39,6 @@ export function getIcon(resource: string): Icon {
   }
 }
 
-class Item extends React.Component<{ resource: string }, any> {
-  constructor(props: { resource: string }) {
-    super(props);
-    this.state = { imageLoaded: false };
-  }
-
-  render() {
-    return (
-      <Row>
-        <Col>
-          <OverlayTrigger
-            trigger="hover"
-            key={"right"}
-            placement={"right"}
-            overlay={
-              <Popover id={`popover-positioned-right`}>
-                <img
-                  alt={""}
-                  style={{
-                    borderStyle: "none",
-                    maxHeight: "20vh",
-                  }}
-                  src={`${this.props.resource}/detail.png`}
-                />
-              </Popover>
-            }
-          >
-            <img
-              alt={""}
-              style={{ width: "60px", height: "48px" }}
-              src={`${this.props.resource}/thumb.png`}
-            />
-          </OverlayTrigger>
-        </Col>
-      </Row>
-    );
-  }
-}
-
 export const ResourceTable = () => {
   return (
     <Table className={"card-1"} variant={"dark"} striped bordered hover>
@@ -90,7 +52,7 @@ export const ResourceTable = () => {
       <tbody>
         <tr>
           <td>
-            <Item
+            <DisplayIcon
               resource={`https://media.newworlddocs.com/media/icons/life-mote`}
             />
           </td>
@@ -99,7 +61,7 @@ export const ResourceTable = () => {
         </tr>
         <tr>
           <td>
-            <Item
+            <DisplayIcon
               resource={`https://media.newworlddocs.com/media/icons/life-moth`}
             />
           </td>
@@ -116,15 +78,26 @@ export const ResourceCard = () => {
     <Card
       className={"light-shadow card-1"}
       style={{
-        backgroundColor: "var(--primary)",
-        color: "white",
-        borderRadius: 2,
+        backgroundColor: "var(--dark)",
+        borderStyle: "none",
         padding: "1vh",
+        borderRadius: 2,
+        color: "white",
         fontFamily: "Roboto Mono",
         textAlign: "center",
       }}
     >
-      <Card.Title>Resources</Card.Title>
+      <Row
+        style={{
+          backgroundColor: "var(--primary)",
+          fontFamily: "Roboto Mono",
+        }}
+      >
+        <Col xs={12}>
+          <Card.Title>Resources</Card.Title>
+        </Col>
+      </Row>
+
       <Row>
         <Col xs={12} style={{ padding: "1vh" }}>
           <ResourceTable />

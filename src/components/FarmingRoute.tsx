@@ -1,11 +1,19 @@
-import React from "react";
-import { Link } from "react-router-dom";
-import { Col, Container, ListGroup, Row } from "react-bootstrap";
+import React, { SyntheticEvent } from "react";
+import { Link, Redirect } from "react-router-dom";
+import {
+  Card,
+  Col,
+  Container,
+  Dropdown,
+  ListGroup,
+  Row,
+} from "react-bootstrap";
 import { RouteComponentProps } from "react-router";
 import { getInitializedApi } from "../api/config";
 import { Topic } from "./Topic";
 import { withRouter } from "react-router-dom";
 import { AxiosInstance } from "axios";
+import DisplayIcon from "./DisplayIcon";
 const linkStyle = {
   textDecoration: "none",
   color: "blue",
@@ -53,7 +61,7 @@ class FarmingRoutes extends React.Component<
         items: FarmingRouteListRecord[];
       }>("farming-routes/?limit=10")
       .then((response) => {
-        console.log(response);
+        console.log(...response.data.items);
         this.setState({
           routes: [...response.data.items],
         });
@@ -69,42 +77,52 @@ class FarmingRoutes extends React.Component<
   handleShow = () => this.setShow(true);
 
   render() {
+    let isDetail: boolean = "id" in this.props.match.params;
     let { id }: { id?: string } = this.props.match.params;
+    if (!isDetail && this.state.routes.length > 0) {
+      return <Redirect to={`/farming-routes/${this.state.routes[0].id}`} />;
+    }
     return (
-      <Container style={{ padding: 0, height: "100%" }}>
+      <Container fluid style={{ padding: 0, height: "100%" }}>
         <Row
           className={"align-items-md-start"}
           style={{ padding: "1vh", borderStyle: "none" }}
         >
           <Col
-            className="flex-column sticky-sm-top"
-            sm={12}
-            md={3}
-            style={{ height: "100%", borderStyle: "none" }}
+            xs={12}
+            style={{
+              padding: 0,
+              backgroundColor: "var(--dark)",
+              borderRadius: 0,
+              fontFamily: "Roboto Mono",
+            }}
           >
-            <ListGroup
-              className="card-2"
-              style={{ borderRadius: 0, borderStyle: "none" }}
-            >
-              <ListGroup.Item
-                style={{
-                  fontSize: "1vw",
-                  fontFamily: "Roboto Mono",
-                }}
-              >
-                <p>Farming Routes</p>
-              </ListGroup.Item>
-              {this.state.routes.map((route) => (
-                <RoutingLink
-                  to={"/farming-routes/" + route.id}
-                  heading={route.heading}
-                  active={route.id === id}
-                />
-              ))}
-              <ListGroup.Item style={{ height: "100%" }} />
-            </ListGroup>
+            <Row>
+              <Col sm={12} md={12}>
+                <Row>
+                  <Col style={{ padding: "1vh" }} sm={3}>
+                    <SelectableDropDown
+                      items={[
+                        {
+                          id: "life_mote",
+                          label: "Life Mote",
+                          link: "/farming-routes/life-mote",
+                          src_thumb:
+                            "https://media.newworlddocs.com/media/icons/life-mote/thumb.png",
+                          src_detail:
+                            "https://media.newworlddocs.com/media/icons/life-mote/thumb.png",
+                        },
+                      ]}
+                      onItemSelect={(key, event) => {
+                        console.log(key);
+                        console.log(event);
+                      }}
+                    />
+                  </Col>
+                </Row>
+              </Col>
+            </Row>
           </Col>
-
           <Col
             className={"card-2"}
             style={{
@@ -113,12 +131,63 @@ class FarmingRoutes extends React.Component<
               borderRadius: 0,
             }}
             sm={12}
-            md={9}
+            md={12}
           >
             {id && <Topic id={id} />}
           </Col>
         </Row>
       </Container>
+    );
+  }
+}
+
+declare interface SelectableDropDownProps {
+  items: any[];
+  onItemSelect(key: string | null, event: any): void;
+}
+
+declare interface SelectableDropDownState {}
+
+class SelectableDropDown extends React.Component<
+  SelectableDropDownProps,
+  SelectableDropDownState
+> {
+  constructor(props: SelectableDropDownProps) {
+    super(props);
+  }
+
+  render() {
+    return (
+      <Dropdown
+        onSelect={(key, event) => this.props.onItemSelect(key, event)}
+        autoClose="outside"
+      >
+        <Dropdown.Toggle id="dropdown-autoclose-outside" variant={"dark"}>
+          <Row>
+            <Row>
+              <Col xs={4}>
+                <DisplayIcon
+                  resource={`https://media.newworlddocs.com/media/icons/life-mote`}
+                />
+              </Col>
+              <Col xs={8}>Life Mote</Col>
+            </Row>
+          </Row>
+        </Dropdown.Toggle>
+
+        <Dropdown.Menu variant={"dark"}>
+          {this.props.items.map((item) => (
+            <Dropdown.Item eventKey={item.id}>
+              <Row>
+                <DisplayIcon
+                  resource={`https://media.newworlddocs.com/media/icons/life-mote`}
+                />
+                <Link to={item.link}>{item.label}</Link>
+              </Row>
+            </Dropdown.Item>
+          ))}
+        </Dropdown.Menu>
+      </Dropdown>
     );
   }
 }
