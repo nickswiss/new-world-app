@@ -8,8 +8,6 @@ class DisplayIcon extends React.Component<{ iconConfig: any }, any> {
   }
 
   render() {
-    console.log("icons config");
-    console.log(this.props.iconConfig);
     return (
       <Row>
         <Col>

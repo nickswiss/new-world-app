@@ -23,9 +23,11 @@ export const ResourceTable = ({
         {resources &&
           resources.map((resource) => (
             <tr>
-              <td>
-                <DisplayIcon iconConfig={icons[resource.resource]} />
-              </td>
+              {icons && (
+                <td>
+                  <DisplayIcon iconConfig={icons[resource.resource]} />
+                </td>
+              )}
               <td>{icons[resource.resource].name}</td>
               <td>{resource.quantity}</td>
             </tr>

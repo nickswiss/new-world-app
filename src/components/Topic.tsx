@@ -11,7 +11,6 @@ export class Topic extends React.Component<any, any> {
     // path of `/topics/:topicId`. The `:topicId` portion
     // of the URL indicates a placeholder that we can
     // get from `useParams()`.
-    console.log(this.props);
     let video = this.props.activeRoute.videos[0];
 
     return (

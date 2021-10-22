@@ -1,6 +1,5 @@
 import React from "react";
 import { Col, Container, Row } from "react-bootstrap";
-import { RouteComponentProps } from "react-router";
 import { getInitializedApi } from "../api/config";
 import { Topic } from "./Topic";
 import { withRouter } from "react-router-dom";
@@ -10,27 +9,27 @@ import { loadActiveTimestamp } from "../reducers/activeTimestampSlice";
 import { objectIsEmpty } from "../lib/utils";
 
 class FarmingRoutes extends React.Component<any, {}> {
-  constructor(props: RouteComponentProps<{ id: "string" }>) {
-    super(props);
-    this.state = {};
-  }
-
   loadRoute() {
     getInitializedApi()
       .get(`farming-routes/${this.props.match.params.id}`)
       .then((response) => this.props.loadActiveRoute(response.data));
   }
 
-  componentDidMount() {
-    this.loadRoute();
-  }
-
-  componentDidUpdate(prevProps, prevState, snapshot) {
-    this.loadRoute();
+  clearActiveRoute() {
+    this.props.loadActiveRoute({});
   }
 
   render() {
     const loadTopic = !objectIsEmpty(this.props.activeRoute);
+
+    // Handle route switch
+    if (this.props.activeRoute.id !== this.props.match.params.id) {
+      if (!this.props.match.params.id) {
+        this.clearActiveRoute();
+      } else {
+        this.loadRoute();
+      }
+    }
     return (
       <Container fluid style={{ padding: 0, height: "100%" }}>
         <Row
