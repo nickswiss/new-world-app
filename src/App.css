@@ -55,3 +55,8 @@
   font-family: 'Roboto Mono';
   font-weight: bold;
 }
+
+.basic-nav-dropdown {
+  width: "250px";
+  background-color: "var(--primary)";
+}

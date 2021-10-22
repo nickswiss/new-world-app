@@ -1,13 +1,15 @@
 import React from "react";
 import { Col, OverlayTrigger, Popover, Row } from "react-bootstrap";
 
-class DisplayIcon extends React.Component<{ resource: string }, any> {
-  constructor(props: { resource: string }) {
+class DisplayIcon extends React.Component<{ iconConfig: any }, any> {
+  constructor(props: { iconConfig: any }) {
     super(props);
     this.state = { imageLoaded: false };
   }
 
   render() {
+    console.log("icons config");
+    console.log(this.props.iconConfig);
     return (
       <Row>
         <Col>
@@ -23,7 +25,7 @@ class DisplayIcon extends React.Component<{ resource: string }, any> {
                     borderStyle: "none",
                     maxHeight: "20vh",
                   }}
-                  src={`${this.props.resource}/detail.png`}
+                  src={this.props.iconConfig.detail_url}
                 />
               </Popover>
             }
@@ -31,7 +33,7 @@ class DisplayIcon extends React.Component<{ resource: string }, any> {
             <img
               alt={""}
               style={{ width: "60px", height: "48px" }}
-              src={`${this.props.resource}/thumb.png`}
+              src={this.props.iconConfig.thumb_url}
             />
           </OverlayTrigger>
         </Col>

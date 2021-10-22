@@ -10,22 +10,43 @@ import FarmingRoute from "./components/FarmingRoute";
 import Jon from "./components/Jon";
 import { Container } from "react-bootstrap";
 import "./App.css";
+import { AxiosInstance } from "axios";
+import { getInitializedApi } from "./api/config";
 
-function App() {
-  return (
-    <Container fluid className={"p-0"}>
-      <Router>
-        <Header />
-        <Switch>
-          {" "}
-          <Redirect exact from="/" to="/farming-routes" />
-          <Route exact path="/jon" component={Jon} />
-          <Route exact path="/farming-routes/" component={FarmingRoute} />
-          <Route exact path="/farming-routes/:id" component={FarmingRoute} />
-        </Switch>
-      </Router>
-    </Container>
-  );
+import { connect } from "react-redux";
+import { loadIcons } from "./reducers/iconSlice";
+
+class App extends React.Component<any, any> {
+  componentDidMount() {
+    let api: AxiosInstance = getInitializedApi();
+    api.get<{ items: any }>("in-game-items/?limit=10").then((response) => {
+      this.props.loadIcons(response.data.items);
+    });
+  }
+
+  render() {
+    return (
+      <Container fluid className={"p-0"}>
+        <Router>
+          <Header />
+          <Switch>
+            {" "}
+            <Redirect exact from="/" to="/farming-routes" />
+            <Route exact path="/jon" component={Jon} />
+            <Route exact path="/farming-routes/" component={FarmingRoute} />
+            <Route exact path="/farming-routes/:id" component={FarmingRoute} />
+          </Switch>
+        </Router>
+      </Container>
+    );
+  }
 }
 
-export default App;
+const mapDispatchToProps = (dispatch) => {
+  return {
+    // dispatching plain actions
+    loadIcons: (icons) => dispatch(loadIcons(icons)),
+  };
+};
+
+export default connect(null, mapDispatchToProps /** no second argument */)(App);
