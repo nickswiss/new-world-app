@@ -21,7 +21,7 @@ const SelectableDropdown = (props) => {
             >
               <Col xs={4}>
                 {!!props.icons && (
-                  <DisplayIcon iconConfig={props.icons[item.id]} />
+                  <DisplayIcon iconConfig={props.icons[item.resource_icon]} />
                 )}
               </Col>
               <Col style={{ color: "black" }} xs={8}>

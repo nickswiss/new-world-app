@@ -31,31 +31,34 @@ class FarmingRoutes extends React.Component<any, {}> {
       }
     }
     return (
-      <Container fluid style={{ padding: 0, height: "100%" }}>
-        <Row
-          className={"align-items-md-start"}
-          style={{ padding: "1vh", borderStyle: "none" }}
-        >
-          <Col
-            className={"card-2"}
-            style={{
-              padding: 0,
-              backgroundColor: "white",
-              borderRadius: 0,
-            }}
-            sm={12}
-            md={12}
+      !objectIsEmpty(this.props.icons) &&
+      this.props.activeRoute && (
+        <Container fluid style={{ padding: 0, height: "100%" }}>
+          <Row
+            className={"align-items-md-start"}
+            style={{ padding: "1vh", borderStyle: "none" }}
           >
-            {loadTopic && (
-              <Topic
-                loadActiveTimestamp={this.props.loadActiveTimestamp}
-                activeTimestamp={this.props.activeTimestamp}
-                activeRoute={this.props.activeRoute}
-              />
-            )}
-          </Col>
-        </Row>
-      </Container>
+            <Col
+              className={"card-2"}
+              style={{
+                padding: 0,
+                backgroundColor: "white",
+                borderRadius: 0,
+              }}
+              sm={12}
+              md={12}
+            >
+              {loadTopic && (
+                <Topic
+                  loadActiveTimestamp={this.props.loadActiveTimestamp}
+                  activeTimestamp={this.props.activeTimestamp}
+                  activeRoute={this.props.activeRoute}
+                />
+              )}
+            </Col>
+          </Row>
+        </Container>
+      )
     );
   }
 }
