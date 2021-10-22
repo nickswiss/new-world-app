@@ -1,38 +1,62 @@
-.App {
-  text-align: center;
+@import url('https://fonts.googleapis.com/css?family=Roboto+Mono:regular,bold,italic&subset=latin,latin-ext');
+@import url('https://fonts.googleapis.com/css?family=Roboto:regular,bold,italic&subset=latin,latin-ext');
+
+:root {
+  --black: #212121;
+  --green: #00600f;
+  --blue: #faf0e6;
+  --purple: #faf0e6;
+  --orange: #faf0e6;
+  --primary: #2962ff;
+  --light: #768fff;
+  --dark: #0039cb;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+:root {
+  --black: #212121;
+  --green: #00600f;
+  --blue: #faf0e6;
+  --purple: #faf0e6;
+  --orange: #faf0e6;
+  --primary: #121212;
+  --light: #2c2c2c;
+  --dark: #000000;
+}
+/*.card-1 {*/
+/*  box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);*/
+/*  transition: all 0.3s cubic-bezier(.25,.8,.25,1);*/
+/*}*/
+
+/*.card-1:hover {*/
+/*  box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);*/
+/*}*/
+
+.light-shadow {
+  box-shadow: 0 3px 6px rgba(0,0,0,0.10), 0 3px 6px rgba(0,0,0,0.10);
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.card-2 {
+  box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.10);
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+.card-3 {
+  box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
 }
 
-.App-link {
-  color: #61dafb;
+.card-4 {
+  box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.card-5 {
+  box-shadow: 0 19px 38px rgba(0,0,0,0.30), 0 15px 12px rgba(0,0,0,0.22);
+}
+
+.h6 {
+  font-family: 'Roboto Mono';
+  font-weight: bold;
+}
+
+.basic-nav-dropdown {
+  width: "250px";
+  background-color: "var(--primary)";
 }
