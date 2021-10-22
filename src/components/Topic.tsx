@@ -37,26 +37,21 @@ export class Topic extends React.Component<any, any> {
               <InfoCard />
             </Col>
           </Row>
-          <Row style={{ paddingTop: "1vh", maxHeight: "50vh" }}>
-            <Col xs={12} md={12}>
-              <Row>
-                <Col>
-                  <MapCard
-                    alt={this.props.activeRoute.map_image.name}
-                    src={this.props.activeRoute.map_image.url}
-                  />{" "}
-                </Col>{" "}
-                <Col>
-                  <VideoCard
-                    video={video}
-                    activeTimestamp={this.props.activeTimestamp}
-                    loadActiveTimestamp={this.props.loadActiveTimestamp}
-                  />
-                </Col>
-              </Row>
+          <Row style={{ paddingTop: "1vh", height: "50vh" }}>
+            <Col md={6} style={{ height: "100%" }}>
+              <MapCard
+                alt={this.props.activeRoute.map_image.name}
+                src={this.props.activeRoute.map_image.url}
+              />{" "}
+            </Col>
+            <Col md={6} style={{ height: "100%" }}>
+              <VideoCard
+                video={video}
+                activeTimestamp={this.props.activeTimestamp}
+                loadActiveTimestamp={this.props.loadActiveTimestamp}
+              />
             </Col>
           </Row>
-          <Row style={{ paddingTop: "1vh" }}></Row>
         </Card.Body>
       </Card>
     );

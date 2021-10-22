@@ -31,13 +31,13 @@ export const VideoCard = (props) => {
     <Card
       className={"card-1"}
       style={{
+        height: "100%",
         backgroundColor: "var(--dark)",
         borderStyle: "none",
         padding: "1vh",
         borderRadius: 2,
         color: "white",
         fontFamily: "Roboto Mono",
-        height: "40vh",
         textAlign: "center",
       }}
     >
