@@ -1,5 +1,6 @@
 import React from "react";
 import { Card, Col, Row } from "react-bootstrap";
+import { connect } from "react-redux";
 
 const PanelSection = ({
   heading,
@@ -26,7 +27,7 @@ const PanelSection = ({
   );
 };
 
-const InfoCard = () => {
+const InfoCard = (props) => {
   return (
     <Card
       className={"light-shadow card-1"}
@@ -41,19 +42,27 @@ const InfoCard = () => {
       <Card.Title>Additional Information</Card.Title>
       <Row>
         <Col xs={6}>
-          <PanelSection heading={"Run Time"} content={"10 min."} />
+          <PanelSection heading={"Run Time"} content={props.run_time} />
         </Col>
         <Col xs={6}>
-          <PanelSection heading={"Level"} content={"50+"} />
+          <PanelSection heading={"Level"} content={props.level_requirement} />
         </Col>
       </Row>
       <Row style={{ paddingTop: "1vh" }}>
         <Col xs={12}>
-          <PanelSection heading={"Location"} content={"Last Stand"} />
+          <PanelSection heading={"Location"} content={props.location} />
         </Col>
       </Row>
     </Card>
   );
 };
 
-export default InfoCard;
+function mapStateToProps(state) {
+  return {
+    run_time: state.activeRoute.run_time,
+    level_requirement: state.activeRoute.level_requirement,
+    location: state.activeRoute.location,
+  };
+}
+
+export default connect(mapStateToProps)(InfoCard);

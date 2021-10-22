@@ -6,14 +6,9 @@ function Jon() {
   return (
     <Container>
       <Row>
-        <h1>Hi Jon!</h1>
-      </Row>
-      <Row>
         <img src={tarkov_sweat} alt="TarkovSweat" />
       </Row>
-      <Row>
-        <h1>Remember this you asshole!?</h1>
-      </Row>
+      <Row></Row>
       <Row style={{ height: "50vh" }}>
         <iframe
           style={{
@@ -27,9 +22,7 @@ function Jon() {
           allowFullScreen
         ></iframe>
       </Row>
-      <Row>
-        <h1>This was pre-meditated</h1>
-      </Row>
+      <Row></Row>
       <Row style={{ height: "50vh" }}>
         <iframe
           style={{
