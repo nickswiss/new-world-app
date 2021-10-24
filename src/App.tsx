@@ -19,7 +19,7 @@ import { loadIcons } from "./reducers/iconSlice";
 class App extends React.Component<any, any> {
   componentDidMount() {
     let api: AxiosInstance = getInitializedApi();
-    api.get<{ items: any }>("in-game-items/?limit=10").then((response) => {
+    api.get<{ items: any }>("in-game-items/?limit=1000").then((response) => {
       this.props.loadIcons(response.data.items);
     });
   }
