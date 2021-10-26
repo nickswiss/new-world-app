@@ -45,16 +45,18 @@ export const VideoCard = (props) => {
         className={"card-1"}
         style={{
           padding: "1vh",
+          height: "10%",
+          backgroundColor: "var(--primary)",
           fontFamily: "Roboto Mono",
         }}
       >
-        Route
+        Route Video Walkthrough
       </Card.Title>
       <iframe
         className={"card-1"}
         style={{
           width: "100%",
-          height: "100%",
+          height: "80%",
         }}
         src={`${props.video.url}?autoplay=1${suffix}`}
         title="YouTube video player"
@@ -62,7 +64,9 @@ export const VideoCard = (props) => {
         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
         allowFullScreen
       ></iframe>
-      {paginatedTimes}
+      <Row style={{ height: "10%" }}>
+        <Col xs={12}>{paginatedTimes}</Col>
+      </Row>
     </Card>
   );
 };

@@ -17,11 +17,12 @@ const SelectableDropdown = (props) => {
           >
             <Row
               id={"dropdown-row"}
+              style={{ margin: "auto" }}
               onClick={(key) => {
                 props.onItemSelect(item.id);
               }}
             >
-              <Col xs={2}>
+              <Col xs={2} style={{ margin: "auto" }}>
                 {!!props.icons && (
                   <DisplayIcon
                     width={"32px"}

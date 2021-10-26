@@ -15,6 +15,8 @@ export const ResourceCard = (props) => {
         color: "white",
         fontFamily: "Roboto Mono",
         textAlign: "center",
+        overflowY: "scroll",
+        maxHeight: "100%",
       }}
     >
       <Row>

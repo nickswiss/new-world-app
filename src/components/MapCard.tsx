@@ -32,30 +32,39 @@ const MapCard = (props) => {
         textAlign: "center",
       }}
     >
-      <Card.Title style={{ padding: "1vh" }} className={"card-1"}>
+      <Card.Title
+        style={{
+          padding: "1vh",
+          backgroundColor: "var(--primary)",
+          height: "10%",
+        }}
+        className={"card-1"}
+      >
         Route (Zoom and Drag)
       </Card.Title>
-      <Col
-        className={"align-items-md-center justify-content-md-center"}
-        style={{ height: "90%", textAlign: "center" }}
-        md={12}
-      >
-        <Map src={props.src} alt={props.alt} />
-        <Row style={{ height: "10vh" }}>
-          <Col xs={4}>
-            <a href={"https://mapgenie.io/"}>
-              <img
-                width={"160px"}
-                height={"22px"}
-                alt={"mapgenie"}
-                src={
-                  "https://media.newworlddocs.com/media/mapgenie/mapgenie.png"
-                }
-              />
-            </a>
-          </Col>
-        </Row>
-      </Col>
+      <Row style={{ height: "80%" }}>
+        <Col
+          className={"align-items-md-center justify-content-md-center"}
+          style={{ height: "100%", textAlign: "center" }}
+          md={12}
+        >
+          <Map src={props.src} alt={props.alt} />
+        </Col>
+      </Row>
+
+      <Row style={{ textAlign: "center", height: "10%" }}>
+        <Col xs={4} style={{ margin: "auto" }}>
+          <p style={{ margin: 0 }}>Made with</p>
+          <a href={"https://mapgenie.io/"}>
+            <img
+              width={"160px"}
+              height={"22px"}
+              alt={"mapgenie"}
+              src={"https://media.newworlddocs.com/media/mapgenie/mapgenie.png"}
+            />
+          </a>
+        </Col>
+      </Row>
     </Card>
   );
 };

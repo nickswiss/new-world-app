@@ -37,7 +37,7 @@ export class Topic extends React.Component<any, any> {
               <InfoCard />
             </Col>
           </Row>
-          <Row style={{ paddingTop: "1vh", height: "50vh" }}>
+          <Row style={{ paddingTop: "1vh", height: "45vh" }}>
             <Col md={6} style={{ height: "100%" }}>
               <MapCard
                 alt={this.props.activeRoute.map_image.name}
