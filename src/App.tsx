@@ -15,6 +15,7 @@ import { getInitializedApi } from "./api/config";
 
 import { connect } from "react-redux";
 import { loadIcons } from "./reducers/iconSlice";
+import IconTest from "./components/IconTest";
 
 class App extends React.Component<any, any> {
   componentDidMount() {
@@ -33,6 +34,7 @@ class App extends React.Component<any, any> {
             {" "}
             <Redirect exact from="/" to="/farming-routes" />
             <Route exact path="/jon" component={Jon} />
+            <Route exact path="/icons" component={IconTest} />
             <Route exact path="/farming-routes/" component={FarmingRoute} />
             <Route exact path="/farming-routes/:id" component={FarmingRoute} />
           </Switch>
