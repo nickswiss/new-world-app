@@ -1,6 +1,32 @@
 import React, { useState } from "react";
 import { Button, Card, Col, Modal } from "react-bootstrap";
 
+import { MapInteractionCSS } from "react-map-interaction";
+
+// This component uses CSS to scale your content.
+// Just pass in content as children and it will take care of the rest.
+const Map = ({ src, alt }: { src: string; alt: string }) => {
+  return (
+    <MapInteractionCSS>
+      <img
+        className={"card-1"}
+        alt={alt}
+        src={src}
+        style={{
+          verticalAlign: "middle",
+          display: "block",
+          marginLeft: "auto",
+          marginRight: "auto",
+          maxHeight: "100%",
+          maxWidth: "100%",
+          width: "auto",
+          height: "auto",
+        }}
+      />
+    </MapInteractionCSS>
+  );
+};
+
 const MapCard = (props) => {
   const [show, setShow] = useState(false);
 
@@ -35,33 +61,7 @@ const MapCard = (props) => {
         style={{ height: "90%", textAlign: "center" }}
         md={12}
       >
-        <img
-          className={"card-1"}
-          onClick={handleShow}
-          alt={props.alt}
-          style={{
-            verticalAlign: "middle",
-            display: "block",
-            marginLeft: "auto",
-            marginRight: "auto",
-            maxHeight: "100%",
-            maxWidth: "100%",
-            width: "auto",
-            height: "auto",
-          }}
-          src={props.src}
-        />
-        <Modal
-          show={show}
-          fullScreen={true}
-          onHide={handleClose}
-          dialogClassName="custom-modal"
-          bsClass="my-modal"
-        >
-          <Modal.Body>
-            <img onClick={handleShow} alt={props.alt} src={props.src} />
-          </Modal.Body>
-        </Modal>
+        <Map src={props.src} alt={props.alt} />
       </Col>
     </Card>
   );
