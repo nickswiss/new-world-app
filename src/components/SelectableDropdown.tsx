@@ -11,7 +11,7 @@ const SelectableDropdown = (props) => {
           <NavDropdown.Item
             key={item.id}
             style={{
-              width: "250px",
+              width: "400px",
             }}
           >
             <Row

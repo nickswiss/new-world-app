@@ -20,10 +20,15 @@ class DisplayIcon extends React.Component<{ iconConfig: any }, any> {
                 <img
                   alt={""}
                   style={{
-                    borderStyle: "none",
+                    display: this.state.imageLoaded ? "inline" : "none",
                     maxHeight: "20vh",
+                    background: "none",
+                    borderStyle: "none",
                   }}
                   src={this.props.iconConfig.detail_url}
+                  onLoad={() => {
+                    this.setState({ imageLoaded: true });
+                  }}
                 />
               </Popover>
             }
