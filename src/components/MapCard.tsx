@@ -9,19 +9,9 @@ const Map = ({ src, alt }: { src: string; alt: string }) => {
   return (
     <MapInteractionCSS>
       <img
-        className={"card-1"}
         alt={alt}
         src={src}
-        style={{
-          verticalAlign: "middle",
-          display: "block",
-          marginLeft: "auto",
-          marginRight: "auto",
-          maxHeight: "100%",
-          maxWidth: "100%",
-          width: "auto",
-          height: "auto",
-        }}
+        style={{ objectFit: "cover", maxHeight: "50%", maxWidth: "100%" }}
       />
     </MapInteractionCSS>
   );
@@ -54,7 +44,7 @@ const MapCard = (props) => {
           fontFamily: "Roboto Mono",
         }}
       >
-        Route
+        Route (Zoom and Drag)
       </Card.Title>
       <Col
         className={"align-items-md-center justify-content-md-center"}
