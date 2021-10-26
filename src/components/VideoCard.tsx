@@ -45,7 +45,6 @@ export const VideoCard = (props) => {
         className={"card-1"}
         style={{
           padding: "1vh",
-          backgroundColor: "var(--primary)",
           fontFamily: "Roboto Mono",
         }}
       >

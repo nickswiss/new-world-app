@@ -27,7 +27,11 @@ class DisplayIcon extends React.Component<
     let renderContent = (
       <img
         alt={""}
-        style={{ width: this.props.width, height: this.props.height }}
+        style={{
+          width: "100%",
+          height: "100%",
+          objectFit: "cover",
+        }}
         src={this.props.icon.thumb_url}
       />
     );

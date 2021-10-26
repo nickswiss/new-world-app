@@ -39,7 +39,9 @@ const InfoCard = (props) => {
         fontFamily: "Roboto Mono",
       }}
     >
-      <Card.Title>Additional Information</Card.Title>
+      <Card.Title style={{ textAlign: "center" }}>
+        Additional Information
+      </Card.Title>
       <Row>
         <Col xs={6}>
           <PanelSection heading={"Run Time"} content={props.run_time} />

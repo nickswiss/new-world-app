@@ -17,12 +17,7 @@ export const ResourceCard = (props) => {
         textAlign: "center",
       }}
     >
-      <Row
-        style={{
-          backgroundColor: "var(--primary)",
-          fontFamily: "Roboto Mono",
-        }}
-      >
+      <Row>
         <Col xs={12}>
           <Card.Title>Resources</Card.Title>
         </Col>
