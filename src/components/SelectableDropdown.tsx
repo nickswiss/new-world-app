@@ -12,19 +12,26 @@ const SelectableDropdown = (props) => {
             key={item.id}
             style={{
               width: "400px",
+              background: "none",
             }}
           >
             <Row
+              id={"dropdown-row"}
               onClick={(key) => {
                 props.onItemSelect(item.id);
               }}
             >
               <Col xs={2}>
                 {!!props.icons && (
-                  <DisplayIcon iconConfig={props.icons[item.resource_icon]} />
+                  <DisplayIcon
+                    width={"32px"}
+                    height={"32px"}
+                    clickable={false}
+                    resource={item.resource_icon}
+                  />
                 )}
               </Col>
-              <Col style={{ color: "black", padding: "1vh" }} xs={10}>
+              <Col style={{ color: "white", padding: "1vh" }} xs={10}>
                 {item.heading}
               </Col>
             </Row>

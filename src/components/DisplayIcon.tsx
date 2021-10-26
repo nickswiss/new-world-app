@@ -1,48 +1,66 @@
 import React from "react";
-import { Col, OverlayTrigger, Popover, Row } from "react-bootstrap";
+import { connect } from "react-redux";
 
-class DisplayIcon extends React.Component<{ iconConfig: any }, any> {
-  constructor(props: { iconConfig: any }) {
+class DisplayIcon extends React.Component<
+  {
+    resource: string;
+    clickable: boolean;
+    width: string;
+    height: string;
+    icon?: any;
+  },
+  any
+> {
+  constructor(props: {
+    resource: string;
+    clickable: boolean;
+    width: string;
+    height: string;
+    icon?: any;
+  }) {
     super(props);
     this.state = { imageLoaded: false };
   }
 
   render() {
+    let itemClass = `item-bg-${this.props.icon.rarity}`;
+    let renderContent = (
+      <img
+        alt={""}
+        style={{ width: this.props.width, height: this.props.height }}
+        src={this.props.icon.thumb_url}
+      />
+    );
+    if (this.props.clickable) {
+      renderContent = <a href={this.props.icon.detail_url}>{renderContent}</a>;
+    }
     return (
-      <Row>
-        <Col>
-          <OverlayTrigger
-            trigger="hover"
-            key={"right"}
-            placement={"right"}
-            overlay={
-              <Popover id={`popover-positioned-right`}>
-                <img
-                  alt={""}
-                  style={{
-                    display: this.state.imageLoaded ? "inline" : "none",
-                    maxHeight: "20vh",
-                    background: "none",
-                    borderStyle: "none",
-                  }}
-                  src={this.props.iconConfig.detail_url}
-                  onLoad={() => {
-                    this.setState({ imageLoaded: true });
-                  }}
-                />
-              </Popover>
-            }
-          >
-            <img
-              alt={""}
-              style={{ width: "60px", height: "48px" }}
-              src={this.props.iconConfig.thumb_url}
-            />
-          </OverlayTrigger>
-        </Col>
-      </Row>
+      <div
+        className={itemClass}
+        style={{
+          width: this.props.width,
+          height: this.props.height,
+          margin: "auto",
+        }}
+      >
+        {renderContent}
+      </div>
     );
   }
 }
 
-export default DisplayIcon;
+const mapStateToProps = (state, ownProps) => {
+  try {
+    let icon = state.icons[ownProps.resource];
+    return {
+      icon: icon,
+    };
+  } catch {
+    console.error(`Could not set icon for ${ownProps.resource}`);
+    return {
+      icon: null,
+    };
+  }
+};
+
+export default connect(mapStateToProps)(DisplayIcon);

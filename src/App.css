@@ -7,21 +7,17 @@
   --blue: #faf0e6;
   --purple: #faf0e6;
   --orange: #faf0e6;
-  --primary: #2962ff;
-  --light: #768fff;
-  --dark: #0039cb;
-}
-
-:root {
-  --black: #212121;
-  --green: #00600f;
-  --blue: #faf0e6;
-  --purple: #faf0e6;
-  --orange: #faf0e6;
   --primary: #121212;
   --light: #2c2c2c;
   --dark: #000000;
+  --rarity-0: 200, 200, 200;
+  --rarity-1: 7, 192, 47;
+  --rarity-2: 0, 203, 233;
+  --rarity-3: 255, 22, 247;
+  --rarity-4: 255, 135, 23;
+  --rarity-5: 200, 200, 200;
 }
+
 /*.card-1 {*/
 /*  box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);*/
 /*  transition: all 0.3s cubic-bezier(.25,.8,.25,1);*/
@@ -59,4 +55,50 @@
 .basic-nav-dropdown {
   width: "250px";
   background-color: "var(--primary)";
+}
+
+/* Common Items */
+.item-bg-0 {
+  border: 1px solid rgba(255,255,255,.5);
+  background: linear-gradient(360deg,rgba(var(--rarity-0),.25) 0,rgba(0,0,0,.5) 100%)
+}
+
+/* Common Items */
+.item-bg-1 {
+  border: 1px solid var(--rarity-1);
+  background: linear-gradient(360deg,rgba(var(--rarity-1),.25) 0,rgba(0,0,0,.5) 100%)
+}
+
+/* Common Items */
+.item-bg-2 {
+  border: 1px solid var(--rarity-2);
+  background: linear-gradient(360deg,rgba(var(--rarity-2),.25) 0,rgba(0,0,0,.5) 100%)
+}
+
+/* Common Items */
+.item-bg-3 {
+   border: 1px solid var(--rarity-3);
+  background: linear-gradient(360deg,rgba(var(--rarity-3),.25) 0,rgba(0,0,0,.5) 100%)
+}
+
+/* Common Items */
+.item-bg-4 {
+   border: 1px solid var(--rarity-4);
+  background: linear-gradient(360deg,rgba(var(--rarity-4),.25) 0,rgba(0,0,0,.5) 100%)
+}
+
+div.dropdown-menu.show {
+  background-color: var(--dark);
+}
+
+a.dropdown-item {
+  color: white;
+}
+
+#dropdown-row {
+  background-color: var(--primary);
+}
+
+#dropdown-row:hover, #dropdown-row:focus {
+  background-color: var(--light);
 }
