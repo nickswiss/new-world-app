@@ -14,7 +14,12 @@ class IconTest extends React.Component<any, any> {
       <Container>
         {icons.map((icon, index) => (
           <Col xs={12} key={index}>
-            <DisplayIcon width={"50px"} height={"50px"} resource={icon} />
+            <DisplayIcon
+              clickable={true}
+              width={"50px"}
+              height={"50px"}
+              resource={icon}
+            />
           </Col>
         ))}
       </Container>
