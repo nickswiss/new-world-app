@@ -38,25 +38,6 @@ export const ResourceTable = ({
               <td style={{ verticalAlign: "middle" }}>{resource.quantity}</td>
             </tr>
           ))}{" "}
-        {resources &&
-          resources.map((resource, index) => (
-            <tr key={index}>
-              {icons && (
-                <td>
-                  <DisplayIcon
-                    width={"64px"}
-                    height={"64px"}
-                    clickable={true}
-                    resource={resource.resource}
-                  />
-                </td>
-              )}
-              <td style={{ verticalAlign: "middle" }}>
-                {icons[resource.resource].name}
-              </td>
-              <td style={{ verticalAlign: "middle" }}>{resource.quantity}</td>
-            </tr>
-          ))}
       </tbody>
     </Table>
   );
