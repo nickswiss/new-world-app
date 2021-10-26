@@ -1,6 +1,5 @@
 import React from "react";
 import { connect } from "react-redux";
-import { objectIsEmpty } from "../lib/utils";
 
 class DisplayIcon extends React.Component<
   {

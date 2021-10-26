@@ -1,7 +1,6 @@
 import React from "react";
-import { Card, Col, Row, Table } from "react-bootstrap";
+import { Table } from "react-bootstrap";
 import DisplayIcon from "./DisplayIcon";
-import { connect } from "react-redux";
 
 export const ResourceTable = ({
   resources,

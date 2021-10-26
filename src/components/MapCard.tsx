@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { Button, Card, Col, Modal } from "react-bootstrap";
+import React from "react";
+import { Card, Col } from "react-bootstrap";
 
 import { MapInteractionCSS } from "react-map-interaction";
 
@@ -18,10 +18,6 @@ const Map = ({ src, alt }: { src: string; alt: string }) => {
 };
 
 const MapCard = (props) => {
-  const [show, setShow] = useState(false);
-
-  const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
   return (
     <Card
       className={"card-1"}
