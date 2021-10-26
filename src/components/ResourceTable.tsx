@@ -10,14 +10,7 @@ export const ResourceTable = ({
   icons: any;
 }) => {
   return (
-    <Table
-      className={"card-1"}
-      variant={"dark"}
-      striped
-      bordered
-      responsive
-      hover
-    >
+    <Table variant={"dark"} striped bordered hover>
       <thead>
         <tr>
           <th></th>
@@ -26,6 +19,25 @@ export const ResourceTable = ({
         </tr>
       </thead>
       <tbody>
+        {resources &&
+          resources.map((resource, index) => (
+            <tr key={index}>
+              {icons && (
+                <td>
+                  <DisplayIcon
+                    width={"64px"}
+                    height={"64px"}
+                    clickable={true}
+                    resource={resource.resource}
+                  />
+                </td>
+              )}
+              <td style={{ verticalAlign: "middle" }}>
+                {icons[resource.resource].name}
+              </td>
+              <td style={{ verticalAlign: "middle" }}>{resource.quantity}</td>
+            </tr>
+          ))}{" "}
         {resources &&
           resources.map((resource, index) => (
             <tr key={index}>

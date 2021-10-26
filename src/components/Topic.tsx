@@ -26,7 +26,7 @@ export class Topic extends React.Component<any, any> {
             textAlign: "center",
           }}
         >
-          Last Stand Life Motes
+          {this.props.activeRoute.heading}
         </Card.Title>
         <Card.Body style={{ backgroundColor: "var(--light)" }}>
           <Row>

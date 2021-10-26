@@ -15,17 +15,24 @@ export const ResourceCard = (props) => {
         color: "white",
         fontFamily: "Roboto Mono",
         textAlign: "center",
-        maxHeight: "100%",
-        overflowY: "scroll",
       }}
     >
-      <Row>
-        <Col xs={12}>
-          <Card.Title>Resources</Card.Title>
-        </Col>
-      </Row>
-
-      <Row>
+      <Card.Title
+        style={{
+          padding: "1vh",
+          backgroundColor: "var(--primary)",
+          height: "10%",
+        }}
+      >
+        Resources
+      </Card.Title>
+      <Row
+        style={{
+          backgroundColor: "var(--primary)",
+          height: "30vh",
+          overflowY: "scroll",
+        }}
+      >
         <Col xs={12}>
           <ResourceTable resources={props.resources} icons={props.icons} />
         </Col>
