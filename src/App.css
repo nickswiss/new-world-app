@@ -10,12 +10,11 @@
   --primary: #121212;
   --light: #2c2c2c;
   --dark: #000000;
-  --rarity-0: 200, 200, 200;
-  --rarity-1: 7, 192, 47;
-  --rarity-2: 0, 203, 233;
-  --rarity-3: 255, 22, 247;
-  --rarity-4: 255, 135, 23;
-  --rarity-5: 200, 200, 200;
+  --rarity-1: 200, 200, 200;
+  --rarity-2: 7, 192, 47;
+  --rarity-3: 0, 203, 233;
+  --rarity-4: 255, 22, 247;
+  --rarity-5: 255, 135, 23;
 }
 
 /*.card-1 {*/
@@ -58,33 +57,33 @@
 }
 
 /* Common Items */
-.item-bg-0 {
-  border: 1px solid rgba(255,255,255,.5);
-  background: linear-gradient(360deg,rgba(var(--rarity-0),.25) 0,rgba(0,0,0,.5) 100%)
-}
-
-/* Common Items */
 .item-bg-1 {
-  border: 1px solid var(--rarity-1);
+  border: 1px solid rgba(255,255,255,.5);
   background: linear-gradient(360deg,rgba(var(--rarity-1),.25) 0,rgba(0,0,0,.5) 100%)
 }
 
-/* Common Items */
+/* Uncommon Items */
 .item-bg-2 {
   border: 1px solid var(--rarity-2);
   background: linear-gradient(360deg,rgba(var(--rarity-2),.25) 0,rgba(0,0,0,.5) 100%)
 }
 
-/* Common Items */
+/* Rare Items */
 .item-bg-3 {
-   border: 1px solid var(--rarity-3);
+  border: 1px solid var(--rarity-3);
   background: linear-gradient(360deg,rgba(var(--rarity-3),.25) 0,rgba(0,0,0,.5) 100%)
 }
 
-/* Common Items */
+/* Epic Items */
 .item-bg-4 {
    border: 1px solid var(--rarity-4);
   background: linear-gradient(360deg,rgba(var(--rarity-4),.25) 0,rgba(0,0,0,.5) 100%)
+}
+
+/* Legendary Items */
+.item-bg-5 {
+   border: 1px solid var(--rarity-5);
+  background: linear-gradient(360deg,rgba(var(--rarity-5),.25) 0,rgba(0,0,0,.5) 100%)
 }
 
 div.dropdown-menu.show {
