@@ -64,7 +64,7 @@ export const VideoCard = (props) => {
         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
         allowFullScreen
       ></iframe>
-      <Row style={{ height: "10%" }}>
+      <Row style={{ height: "10%", overflowY: "scroll" }}>
         <Col xs={12}>{paginatedTimes}</Col>
       </Row>
     </Card>

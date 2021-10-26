@@ -10,7 +10,14 @@ export const ResourceTable = ({
   icons: any;
 }) => {
   return (
-    <Table className={"card-1"} variant={"dark"} striped bordered hover>
+    <Table
+      className={"card-1"}
+      variant={"dark"}
+      striped
+      bordered
+      responsive
+      hover
+    >
       <thead>
         <tr>
           <th></th>

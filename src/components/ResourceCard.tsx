@@ -15,8 +15,8 @@ export const ResourceCard = (props) => {
         color: "white",
         fontFamily: "Roboto Mono",
         textAlign: "center",
-        overflowY: "scroll",
         maxHeight: "100%",
+        overflowY: "scroll",
       }}
     >
       <Row>
@@ -26,7 +26,7 @@ export const ResourceCard = (props) => {
       </Row>
 
       <Row>
-        <Col xs={12} style={{ padding: "1vh" }}>
+        <Col xs={12}>
           <ResourceTable resources={props.resources} icons={props.icons} />
         </Col>
       </Row>
