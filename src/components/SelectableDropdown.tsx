@@ -19,12 +19,12 @@ const SelectableDropdown = (props) => {
                 props.onItemSelect(item.id);
               }}
             >
-              <Col xs={4}>
+              <Col xs={2}>
                 {!!props.icons && (
                   <DisplayIcon iconConfig={props.icons[item.resource_icon]} />
                 )}
               </Col>
-              <Col style={{ color: "black" }} xs={8}>
+              <Col style={{ color: "black", padding: "1vh" }} xs={10}>
                 {item.heading}
               </Col>
             </Row>
