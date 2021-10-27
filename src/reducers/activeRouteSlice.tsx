@@ -5,6 +5,8 @@ export const activeRouteSlice = createSlice({
   initialState: {},
   reducers: {
     loadActiveRoute: (state: any & { activeRoute: any }, action) => {
+      console.log("action");
+      console.log(action);
       // Redux Toolkit allows us to write "mutating" logic in reducers. It
       // doesn't actually mutate the state because it uses the Immer library,
       // which detects changes to a "draft state" and produces a brand new
