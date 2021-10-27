@@ -27,6 +27,8 @@ class FarmingRoutes extends React.Component<any, {}> {
       if (!this.props.match.params.id) {
         this.clearActiveRoute();
       } else {
+        console.log(this.props.activeRoute.id);
+        console.log(this.props.match.params.id);
         this.loadRoute();
       }
     }
