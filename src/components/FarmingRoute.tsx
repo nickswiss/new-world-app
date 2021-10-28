@@ -1,7 +1,7 @@
 import React from "react";
 import { Col, Container, Row } from "react-bootstrap";
 import { getInitializedApi } from "../api/config";
-import { Topic } from "./Topic";
+import Topic from "./Topic";
 import { withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 import { loadActiveRoute } from "../reducers/activeRouteSlice";

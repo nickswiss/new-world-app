@@ -87,40 +87,6 @@ const InfoCard = (props) => {
               </PanelSection>
             </Col>
           </Row>
-          <Row style={{ paddingTop: "1vh" }}>
-            <Col xs={12}>
-              <PanelSection content={props.location}>
-                <Row>
-                  <Col xs={6}>
-                    {" "}
-                    <iframe
-                      style={{ width: "100%", height: "240px" }}
-                      title={"affiliate-1"}
-                      marginWidth={0}
-                      marginHeight={0}
-                      scrolling="no"
-                      frameBorder={0}
-                      src="//ws-na.amazon-adsystem.com/widgets/q?ServiceVersion=20070822&OneJS=1&Operation=GetAdHtml&MarketPlace=US&source=ac&ref=tf_til&ad_type=product_link&tracking_id=newworlddocs-20&marketplace=amazon&amp;region=US&placement=B01LVTI3TO&asins=B01LVTI3TO&linkId=aac9491492f55ff926ddc6b434d393ad&show_border=true&link_opens_in_new_window=true&price_color=333333&title_color=0066c0&bg_color=ffffff"
-                    />
-                  </Col>
-                </Row>
-                <Row>
-                  <Col xs={6}>
-                    {" "}
-                    <iframe
-                      style={{ width: "100%", height: "240px" }}
-                      title={"affiliate-1"}
-                      marginWidth={0}
-                      marginHeight={0}
-                      scrolling="no"
-                      frameBorder={0}
-                      src="//ws-na.amazon-adsystem.com/widgets/q?ServiceVersion=20070822&OneJS=1&Operation=GetAdHtml&MarketPlace=US&source=ac&ref=tf_til&ad_type=product_link&tracking_id=newworlddocs-20&marketplace=amazon&amp;region=US&placement=B01LVTI3TO&asins=B01LVTI3TO&linkId=aac9491492f55ff926ddc6b434d393ad&show_border=true&link_opens_in_new_window=true&price_color=333333&title_color=0066c0&bg_color=ffffff"
-                    />
-                  </Col>
-                </Row>
-              </PanelSection>
-            </Col>
-          </Row>
         </Col>
       </Row>
     </Card>
