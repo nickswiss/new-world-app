@@ -22,7 +22,7 @@ export const getApiDomain = () => {
    */
   const env = getEnvironment();
   if (env === PROD) {
-    return "https://ha1pzm8y23.execute-api.us-east-1.amazonaws.com/prod/";
+    return "https://api.newworlddocs.com/";
   }
   return "https://bj56e6ed80.execute-api.us-east-1.amazonaws.com/dev/";
 };

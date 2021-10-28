@@ -19,6 +19,19 @@ class FarmingRoutes extends React.Component<any, {}> {
     this.props.loadActiveRoute({});
   }
 
+  componentDidUpdate(
+    prevProps: Readonly<any>,
+    prevState: Readonly<{}>,
+    snapshot?: any
+  ) {
+    console.log(`prevProps:`);
+    console.log(prevProps);
+    console.log(`prevState:`);
+    console.log(prevState);
+    console.log(`snapshot:`);
+    console.log(snapshot);
+  }
+
   render() {
     const loadTopic = !objectIsEmpty(this.props.activeRoute);
 
