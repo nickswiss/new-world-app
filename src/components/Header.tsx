@@ -7,6 +7,7 @@ import FarmingRouteDropdown from "./FarmingRouteDropdown";
 import { withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 import { loadFarmingRoutes } from "../reducers/farmingRouteSlice";
+import { loadActiveRoute } from "../reducers/activeRouteSlice";
 
 export interface FarmingRouteListRecord {
   id: string;
@@ -21,9 +22,12 @@ class Header extends React.Component<
   componentDidMount() {
     let api: AxiosInstance = getInitializedApi();
     api
-      .get<{ items: FarmingRouteListRecord[] }>("farming-routes/?limit=10")
+      .get<{ items: FarmingRouteListRecord[] }>("farming-routes/?limit=100")
       .then((response) => {
         this.props.loadFarmingRoutes(response.data.items);
+        this.props.history.push(
+          `/farming-routes/${this.props.farmingRoutes[0].id}`
+        );
       });
   }
 
@@ -67,6 +71,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => ({
   // dispatching plain actions
   loadFarmingRoutes: (routes) => dispatch(loadFarmingRoutes(routes)),
+  loadActiveRoute: (route) => dispatch(loadActiveRoute(route)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(withRouter(Header));
