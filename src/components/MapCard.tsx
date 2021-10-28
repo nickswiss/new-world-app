@@ -32,17 +32,17 @@ const MapCard = (props) => {
         textAlign: "center",
       }}
     >
-      <Card.Title
-        style={{
-          padding: "1vh",
-          backgroundColor: "var(--primary)",
-          height: "10%",
-        }}
-        className={"card-1"}
-      >
-        Route (Zoom and Drag)
-      </Card.Title>
-      <Row style={{ height: "80%" }}>
+      {/*<Card.Title*/}
+      {/*  style={{*/}
+      {/*    padding: "1vh",*/}
+      {/*    backgroundColor: "var(--primary)",*/}
+      {/*    height: "10%",*/}
+      {/*  }}*/}
+      {/*  className={"card-1"}*/}
+      {/*>*/}
+      {/*  Route (Zoom and Drag)*/}
+      {/*</Card.Title>*/}
+      <Row style={{ height: "90%" }}>
         <Col
           className={"align-items-md-center justify-content-md-center"}
           style={{ height: "100%", textAlign: "center" }}

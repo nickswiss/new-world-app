@@ -50,6 +50,22 @@ const InfoCard = (props) => {
         Additional Information
       </Card.Title>
       <Row>
+        <Col md={6} xs={12} style={{ height: "50%" }}>
+          <Row>
+            <Col xs={12}>
+              <PanelSection content={props.location}>
+                <Row>
+                  <Col>
+                    <ResourceTable
+                      resources={props.resources}
+                      icons={props.icons}
+                    />
+                  </Col>
+                </Row>
+              </PanelSection>
+            </Col>
+          </Row>
+        </Col>
         <Col xs={12} md={6}>
           {" "}
           <Row>
@@ -68,22 +84,6 @@ const InfoCard = (props) => {
             <Col xs={12}>
               <PanelSection heading={"Location"} content={props.location}>
                 <p>{props.location}</p>
-              </PanelSection>
-            </Col>
-          </Row>
-        </Col>
-        <Col md={6} xs={12} style={{ height: "50%" }}>
-          <Row>
-            <Col xs={12}>
-              <PanelSection content={props.location}>
-                <Row>
-                  <Col>
-                    <ResourceTable
-                      resources={props.resources}
-                      icons={props.icons}
-                    />
-                  </Col>
-                </Row>
               </PanelSection>
             </Col>
           </Row>

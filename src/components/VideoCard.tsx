@@ -41,22 +41,22 @@ export const VideoCard = (props) => {
         textAlign: "center",
       }}
     >
-      <Card.Title
-        className={"card-1"}
-        style={{
-          padding: "1vh",
-          height: "10%",
-          backgroundColor: "var(--primary)",
-          fontFamily: "Roboto Mono",
-        }}
-      >
-        Route Video Walkthrough
-      </Card.Title>
+      {/*<Card.Title*/}
+      {/*  className={"card-1"}*/}
+      {/*  style={{*/}
+      {/*    padding: "1vh",*/}
+      {/*    height: "10%",*/}
+      {/*    backgroundColor: "var(--primary)",*/}
+      {/*    fontFamily: "Roboto Mono",*/}
+      {/*  }}*/}
+      {/*>*/}
+      {/*  Route Video Walkthrough*/}
+      {/*</Card.Title>*/}
       <iframe
         className={"card-1"}
         style={{
           width: "100%",
-          height: "80%",
+          height: "90%",
         }}
         src={`${props.video.url}?autoplay=1${suffix}`}
         title="YouTube video player"
