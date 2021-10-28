@@ -46,7 +46,7 @@ class FarmingRoutes extends React.Component<any, {}> {
     return (
       !objectIsEmpty(this.props.icons) &&
       this.props.activeRoute && (
-        <Container fluid style={{ padding: 0, height: "100%" }}>
+        <Container fluid style={{ padding: 0, height: "90%" }}>
           <Row
             className={"align-items-md-start"}
             style={{ padding: "1vh", borderStyle: "none" }}

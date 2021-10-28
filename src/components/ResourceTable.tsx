@@ -25,8 +25,8 @@ export const ResourceTable = ({
               {icons && (
                 <td>
                   <DisplayIcon
-                    width={"64px"}
-                    height={"64px"}
+                    width={"32px"}
+                    height={"32px"}
                     clickable={true}
                     resource={resource.resource}
                   />

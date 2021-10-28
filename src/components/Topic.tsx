@@ -1,6 +1,5 @@
 import { Card, Col, Row } from "react-bootstrap";
 import React from "react";
-import ResourceCard from "./ResourceCard";
 import InfoCard from "./InfoCard";
 import VideoCard from "./VideoCard";
 import MapCard from "./MapCard";
@@ -15,7 +14,6 @@ export class Topic extends React.Component<any, any> {
 
     return (
       <Card style={{ borderRadius: 0, borderStyle: "none" }}>
-        <div style={{ backgroundColor: "var(--dark)", height: "3px" }} />
         <Card.Title
           style={{
             backgroundColor: "var(--primary)",
@@ -29,27 +27,24 @@ export class Topic extends React.Component<any, any> {
           {this.props.activeRoute.heading}
         </Card.Title>
         <Card.Body style={{ backgroundColor: "var(--light)" }}>
-          <Row>
-            <Col xs={12} md={6}>
-              <ResourceCard />
-            </Col>
-            <Col xs={12} md={6}>
-              <InfoCard />
-            </Col>
-          </Row>
-          <Row style={{ paddingTop: "1vh", height: "45vh" }}>
-            <Col md={6} style={{ height: "100%" }}>
+          <Row style={{ paddingTop: "1vh" }}>
+            <Col md={6} xs={12}>
               <MapCard
                 alt={this.props.activeRoute.map_image.name}
                 src={this.props.activeRoute.map_image.url}
               />{" "}
             </Col>
-            <Col md={6} style={{ height: "100%" }}>
+            <Col md={6} xs={12} style={{ height: "100%" }}>
               <VideoCard
                 video={video}
                 activeTimestamp={this.props.activeTimestamp}
                 loadActiveTimestamp={this.props.loadActiveTimestamp}
               />
+            </Col>
+          </Row>
+          <Row style={{ paddingTop: "1vh" }}>
+            <Col xs={12} md={12}>
+              <InfoCard />
             </Col>
           </Row>
         </Card.Body>
