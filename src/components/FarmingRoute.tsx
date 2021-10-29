@@ -50,7 +50,10 @@ class FarmingRoutes extends React.Component<any, {}> {
                 height: "90vh",
               }}
             >
-              <Spinner animation={"border"} />
+              <Spinner
+                style={{ width: "50vh", height: "50vh" }}
+                animation={"border"}
+              />
             </Col>
           </Row>
         </FarmingRouteContainer>
