@@ -1,94 +1,120 @@
 import React from "react";
-import { Col, Container, Row } from "react-bootstrap";
-import { getInitializedApi } from "../api/config";
+import { Col, Container, Row, Spinner } from "react-bootstrap";
 import Topic from "./Topic";
 import { withRouter } from "react-router-dom";
 import { connect } from "react-redux";
-import { loadActiveRoute } from "../reducers/activeRouteSlice";
-import { loadActiveTimestamp } from "../reducers/activeTimestampSlice";
 import { objectIsEmpty } from "../lib/utils";
+import { fetchActiveFarmingRouteRequest } from "../actions";
+
+const FarmingRouteContainer = (props) => (
+  <Container fluid style={{ padding: 0, height: "100vh" }}>
+    <Row
+      className={"align-items-md-start"}
+      style={{ padding: "1vh", borderStyle: "none" }}
+    >
+      <Col
+        className={"card-2"}
+        style={{
+          padding: 0,
+          borderRadius: 0,
+          height: "100%",
+          width: "100%",
+        }}
+        sm={12}
+        md={12}
+      >
+        {props.children}
+      </Col>
+    </Row>
+  </Container>
+);
 
 class FarmingRoutes extends React.Component<any, {}> {
-  loadRoute() {
-    getInitializedApi()
-      .get(`farming-routes/${this.props.match.params.id}`)
-      .then((response) => this.props.loadActiveRoute(response.data));
-  }
-
-  clearActiveRoute() {
-    this.props.loadActiveRoute({});
-  }
-
-  componentDidUpdate(
-    prevProps: Readonly<any>,
-    prevState: Readonly<{}>,
-    snapshot?: any
-  ) {
-    console.log(`prevProps:`);
-    console.log(prevProps);
-    console.log(`prevState:`);
-    console.log(prevState);
-    console.log(`snapshot:`);
-    console.log(snapshot);
-  }
-
   render() {
-    const loadTopic = !objectIsEmpty(this.props.activeRoute);
-
-    // Handle route switch
-    if (this.props.activeRoute.id !== this.props.match.params.id) {
-      if (!this.props.match.params.id) {
-        this.clearActiveRoute();
-      } else {
-        this.loadRoute();
-      }
-    }
-    return (
-      !objectIsEmpty(this.props.icons) &&
-      this.props.activeRoute && (
-        <Container fluid style={{ padding: 0, height: "90%" }}>
-          <Row
-            className={"align-items-md-start"}
-            style={{ padding: "1vh", borderStyle: "none" }}
-          >
+    if (
+      objectIsEmpty(this.props.activeFarmingRoute) ||
+      this.props.activeFarmingRoute.id !== this.props.match.params.id
+    ) {
+      // Initial Load
+      this.props.loadActiveRoute(this.props.match.params.id);
+      return (
+        <FarmingRouteContainer>
+          <Row>
             <Col
-              className={"card-2"}
+              xs={12}
               style={{
-                padding: 0,
-                backgroundColor: "white",
-                borderRadius: 0,
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+                textAlign: "center",
+                height: "90vh",
               }}
-              sm={12}
-              md={12}
             >
-              {loadTopic && (
-                <Topic
-                  loadActiveTimestamp={this.props.loadActiveTimestamp}
-                  activeTimestamp={this.props.activeTimestamp}
-                  activeRoute={this.props.activeRoute}
-                />
-              )}
+              <Spinner animation={"border"} />
             </Col>
           </Row>
-        </Container>
-      )
+        </FarmingRouteContainer>
+      );
+    }
+
+    if (this.props.loadingActiveFarmingRoute || this.props.loadingInGameItems) {
+      // We are at a route which is not loaded yet
+      return (
+        <FarmingRouteContainer>
+          <Row>
+            <Col
+              xs={12}
+              style={{
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+                textAlign: "center",
+                height: "90vh",
+              }}
+            >
+              <Spinner
+                style={{ width: "50vh", height: "50vh" }}
+                animation={"border"}
+              />
+            </Col>
+          </Row>
+        </FarmingRouteContainer>
+      );
+    }
+
+    return (
+      <FarmingRouteContainer>
+        {" "}
+        <Topic
+          loadActiveTimestamp={this.props.loadActiveTimestamp}
+          activeTimestamp={this.props.activeTimestamp}
+          activeRoute={this.props.activeFarmingRoute}
+        />
+      </FarmingRouteContainer>
     );
   }
 }
 
 function mapDispatchToProps(dispatch) {
   return {
-    loadActiveRoute: (route) => dispatch(loadActiveRoute(route)),
-    loadActiveTimestamp: (timestamp) =>
-      dispatch(loadActiveTimestamp(timestamp)),
+    loadActiveRoute: (id) => dispatch(fetchActiveFarmingRouteRequest(id)),
   };
 }
+
 function mapStateToProps(state) {
-  const { icons, activeRoute, activeTimestamp } = state;
+  const {
+    inGameItems,
+    activeFarmingRoute,
+    activeTimestamp,
+    loadingActiveFarmingRoute,
+    loadingInGameItems,
+  } = state;
   return {
-    icons: icons,
-    activeRoute: activeRoute,
-    activeTimestamp: activeTimestamp,
+    inGameItems,
+    activeFarmingRoute,
+    activeTimestamp,
+    loadingActiveFarmingRoute,
+    loadingInGameItems,
   };
 }
 export default connect(

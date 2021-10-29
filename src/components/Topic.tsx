@@ -9,6 +9,7 @@ const Topic = (props) => {
   // path of `/topics/:topicId`. The `:topicId` portion
   // of the URL indicates a placeholder that we can
   // get from `useParams()`.
+  console.log(props);
   let video = props.activeRoute.videos[0];
   const [showAd, setShowAd] = useState(true);
   const toggleShowAd = () => setShowAd(!showAd);

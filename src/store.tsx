@@ -1,17 +1,59 @@
 import { configureStore } from "@reduxjs/toolkit";
-import IconReducer from "./reducers/iconSlice";
-import FarmingRouteReducer from "./reducers/farmingRouteSlice";
-import ActiveRouteReducer from "./reducers/activeRouteSlice";
 import ActiveTimestampReducer from "./reducers/activeTimestampSlice";
+import { createBrowserHistory } from "history";
+import { connectRouter, routerMiddleware } from "connected-react-router";
+import createSagaMiddleware from "redux-saga";
+import {
+  activeFarmingRouteSaga,
+  appLoadSaga,
+  farmingRouteSaga,
+  inGameItemSaga,
+} from "./sagas";
+import {
+  farmingRoutes,
+  loadingFarmingRoutes,
+  errorLoadingFarmingRoutes,
+} from "./reducers/farmingRoutes";
+
+import {
+  activeFarmingRoute,
+  loadingActiveFarmingRoute,
+  errorLoadingActiveFarmingRoute,
+} from "./reducers/activeFarmingRoute";
+
+import {
+  inGameItems,
+  loadingInGameItems,
+  errorLoadingInGameItems,
+} from "./reducers/inGameItems";
+
+export const history = createBrowserHistory();
+const sagaMiddleware = createSagaMiddleware();
 
 const store = configureStore({
   reducer: {
-    icons: IconReducer,
-    farmingRoutes: FarmingRouteReducer,
-    activeRoute: ActiveRouteReducer,
+    router: connectRouter(history),
     activeTimestamp: ActiveTimestampReducer,
+    activeFarmingRoute,
+    loadingActiveFarmingRoute,
+    errorLoadingActiveFarmingRoute,
+    farmingRoutes,
+    loadingFarmingRoutes,
+    errorLoadingFarmingRoutes,
+    inGameItems,
+    loadingInGameItems,
+    errorLoadingInGameItems,
   },
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware()
+      .concat(routerMiddleware(history))
+      .concat(sagaMiddleware),
 });
+
+sagaMiddleware.run(appLoadSaga);
+sagaMiddleware.run(farmingRouteSaga);
+sagaMiddleware.run(inGameItemSaga);
+sagaMiddleware.run(activeFarmingRouteSaga);
 
 // Infer the `RootState` and `AppDispatch` types from the store itself
 export type RootState = ReturnType<typeof store.getState>;

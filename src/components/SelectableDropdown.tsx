@@ -1,12 +1,21 @@
-import { Col, NavDropdown, Row } from "react-bootstrap";
+import { Col, NavDropdown, Row, Spinner } from "react-bootstrap";
 import DisplayIcon from "./DisplayIcon";
 import React from "react";
-import { connect } from "react-redux";
 
 const SelectableDropdown = (props) => {
   return (
     <NavDropdown title="Select Another Route" id="basic-nav-dropdown">
-      {props.items &&
+      {props.isLoadingItems ? (
+        <NavDropdown.Item
+          style={{
+            width: "400px",
+            background: "none",
+            textAlign: "center",
+          }}
+        >
+          <Spinner animation={"grow"} />{" "}
+        </NavDropdown.Item>
+      ) : (
         props.items.map((item) => (
           <NavDropdown.Item
             key={item.id}
@@ -23,7 +32,9 @@ const SelectableDropdown = (props) => {
               }}
             >
               <Col xs={2} style={{ margin: "auto" }}>
-                {!!props.icons && (
+                {props.isLoadingIcons ? (
+                  <Spinner animation={"grow"} />
+                ) : (
                   <DisplayIcon
                     width={"32px"}
                     height={"32px"}
@@ -37,15 +48,10 @@ const SelectableDropdown = (props) => {
               </Col>
             </Row>
           </NavDropdown.Item>
-        ))}
+        ))
+      )}
     </NavDropdown>
   );
 };
 
-function mapStateToProps(state) {
-  return {
-    icons: { ...state.icons },
-  };
-}
-
-export default connect(mapStateToProps)(SelectableDropdown);
+export default SelectableDropdown;

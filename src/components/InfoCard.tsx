@@ -58,7 +58,7 @@ const InfoCard = (props) => {
                   <Col>
                     <ResourceTable
                       resources={props.resources}
-                      icons={props.icons}
+                      icons={props.inGameItems}
                     />
                   </Col>
                 </Row>
@@ -95,11 +95,11 @@ const InfoCard = (props) => {
 
 function mapStateToProps(state) {
   return {
-    resources: state.activeRoute.resources,
-    run_time: state.activeRoute.run_time,
-    level_requirement: state.activeRoute.level_requirement,
-    location: state.activeRoute.location,
-    icons: state.icons,
+    resources: state.activeFarmingRoute.resources,
+    run_time: state.activeFarmingRoute.run_time,
+    level_requirement: state.activeFarmingRoute.level_requirement,
+    location: state.activeFarmingRoute.location,
+    inGameItems: state.inGameItems,
   };
 }
 

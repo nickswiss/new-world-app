@@ -7,7 +7,7 @@ class DisplayIcon extends React.Component<
     clickable: boolean;
     width: string;
     height: string;
-    icon?: any;
+    item?: any;
   },
   any
 > {
@@ -16,14 +16,14 @@ class DisplayIcon extends React.Component<
     clickable: boolean;
     width: string;
     height: string;
-    icon?: any;
+    item?: any;
   }) {
     super(props);
     this.state = { imageLoaded: false };
   }
 
   render() {
-    let itemClass = `item-bg-${this.props.icon.rarity}`;
+    let itemClass = `item-bg-${this.props.item.rarity}`;
     let renderContent = (
       <img
         alt={""}
@@ -32,11 +32,11 @@ class DisplayIcon extends React.Component<
           height: "100%",
           objectFit: "cover",
         }}
-        src={this.props.icon.thumb_url}
+        src={this.props.item.thumb_url}
       />
     );
     if (this.props.clickable) {
-      renderContent = <a href={this.props.icon.detail_url}>{renderContent}</a>;
+      renderContent = <a href={this.props.item.detail_url}>{renderContent}</a>;
     }
     return (
       <div
@@ -55,14 +55,14 @@ class DisplayIcon extends React.Component<
 
 const mapStateToProps = (state, ownProps) => {
   try {
-    let icon = state.icons[ownProps.resource];
+    let item = state.inGameItems[ownProps.resource];
     return {
-      icon: icon,
+      item: item,
     };
   } catch {
     console.error(`Could not set icon for ${ownProps.resource}`);
     return {
-      icon: null,
+      item: null,
     };
   }
 };
