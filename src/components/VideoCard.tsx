@@ -41,17 +41,6 @@ export const VideoCard = (props) => {
         textAlign: "center",
       }}
     >
-      {/*<Card.Title*/}
-      {/*  className={"card-1"}*/}
-      {/*  style={{*/}
-      {/*    padding: "1vh",*/}
-      {/*    height: "10%",*/}
-      {/*    backgroundColor: "var(--primary)",*/}
-      {/*    fontFamily: "Roboto Mono",*/}
-      {/*  }}*/}
-      {/*>*/}
-      {/*  Route Video Walkthrough*/}
-      {/*</Card.Title>*/}
       <iframe
         className={"card-1"}
         style={{

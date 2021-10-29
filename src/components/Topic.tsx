@@ -5,11 +5,6 @@ import VideoCard from "./VideoCard";
 import MapCard from "./MapCard";
 
 const Topic = (props) => {
-  // The <Route> that rendered this component has a
-  // path of `/topics/:topicId`. The `:topicId` portion
-  // of the URL indicates a placeholder that we can
-  // get from `useParams()`.
-  console.log(props);
   let video = props.activeRoute.videos[0];
   const [showAd, setShowAd] = useState(true);
   const toggleShowAd = () => setShowAd(!showAd);
