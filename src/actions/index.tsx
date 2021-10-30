@@ -43,7 +43,6 @@ export const fetchInGameItemsRequest = () => ({
 
 export function* fetchInGameItems(action) {
   try {
-    yield sleep(10000);
     const items = yield call(getInGameItems);
     yield put({ type: TYPES.FETCH_IN_GAME_ITEMS_SUCCESS, data: items });
   } catch (e) {
