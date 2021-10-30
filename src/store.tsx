@@ -1,5 +1,4 @@
 import { configureStore } from "@reduxjs/toolkit";
-import ActiveTimestampReducer from "./reducers/activeTimestampSlice";
 import { createBrowserHistory } from "history";
 import { connectRouter, routerMiddleware } from "connected-react-router";
 import createSagaMiddleware from "redux-saga";
@@ -27,13 +26,14 @@ import {
   errorLoadingInGameItems,
 } from "./reducers/inGameItems";
 
+import { activeTimestamp } from "./reducers/activeTimestamp";
+
 export const history = createBrowserHistory();
 const sagaMiddleware = createSagaMiddleware();
 
 const store = configureStore({
   reducer: {
     router: connectRouter(history),
-    activeTimestamp: ActiveTimestampReducer,
     activeFarmingRoute,
     loadingActiveFarmingRoute,
     errorLoadingActiveFarmingRoute,
@@ -43,6 +43,7 @@ const store = configureStore({
     inGameItems,
     loadingInGameItems,
     errorLoadingInGameItems,
+    activeTimestamp,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware()

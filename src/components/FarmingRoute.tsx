@@ -1,10 +1,9 @@
 import React from "react";
 import { Col, Container, Row, Spinner } from "react-bootstrap";
 import Topic from "./Topic";
-import { withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 import { objectIsEmpty } from "../lib/utils";
-import { fetchActiveFarmingRouteRequest } from "../actions";
+import { fetchActiveFarmingRouteRequest, setActiveTimestamp } from "../actions";
 
 const FarmingRouteContainer = (props) => (
   <Container fluid style={{ padding: 0, height: "100vh" }}>
@@ -30,37 +29,26 @@ const FarmingRouteContainer = (props) => (
 );
 
 class FarmingRoutes extends React.Component<any, {}> {
+  constructor(props) {
+    super(props);
+  }
+
+  componentDidMount() {
+    this.props.loadActiveRoute(this.props.match.params.id);
+  }
+
+  componentDidUpdate(prevProps) {
+    if (this.props.location !== prevProps.location) {
+      this.props.loadActiveRoute(this.props.match.params.id);
+    }
+  }
+
   render() {
     if (
-      objectIsEmpty(this.props.activeFarmingRoute) ||
-      this.props.activeFarmingRoute.id !== this.props.match.params.id
+      this.props.loadingActiveFarmingRoute ||
+      this.props.loadingInGameItems ||
+      objectIsEmpty(this.props.activeFarmingRoute)
     ) {
-      // Initial Load
-      this.props.loadActiveRoute(this.props.match.params.id);
-      return (
-        <FarmingRouteContainer>
-          <Row>
-            <Col
-              xs={12}
-              style={{
-                display: "flex",
-                justifyContent: "center",
-                alignItems: "center",
-                textAlign: "center",
-                height: "90vh",
-              }}
-            >
-              <Spinner
-                style={{ width: "50vh", height: "50vh" }}
-                animation={"border"}
-              />
-            </Col>
-          </Row>
-        </FarmingRouteContainer>
-      );
-    }
-
-    if (this.props.loadingActiveFarmingRoute || this.props.loadingInGameItems) {
       // We are at a route which is not loaded yet
       return (
         <FarmingRouteContainer>
@@ -101,6 +89,7 @@ class FarmingRoutes extends React.Component<any, {}> {
 function mapDispatchToProps(dispatch) {
   return {
     loadActiveRoute: (id) => dispatch(fetchActiveFarmingRouteRequest(id)),
+    loadActiveTimestamp: (timestamp) => dispatch(setActiveTimestamp(timestamp)),
   };
 }
 
@@ -120,7 +109,4 @@ function mapStateToProps(state) {
     loadingInGameItems,
   };
 }
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(withRouter(FarmingRoutes));
+export default connect(mapStateToProps, mapDispatchToProps)(FarmingRoutes);

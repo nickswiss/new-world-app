@@ -1,5 +1,5 @@
 import React from "react";
-import { Route, Switch, Redirect } from "react-router-dom";
+import { Route, Switch } from "react-router-dom";
 import Header from "./components/Header";
 import FarmingRoute from "./components/FarmingRoute";
 import Jon from "./components/Jon";
@@ -9,7 +9,6 @@ import { connect } from "react-redux";
 import IconTest from "./components/IconTest";
 import { history } from "./store";
 import { ConnectedRouter } from "connected-react-router";
-import { fetchInGameItemsRequest } from "./actions";
 
 class App extends React.Component<any, any> {
   componentDidMount() {

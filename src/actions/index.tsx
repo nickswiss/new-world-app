@@ -10,6 +10,11 @@ export function sleep(ms) {
   return new Promise((resolve) => setTimeout(resolve, ms));
 }
 
+export const setActiveTimestamp = (timestamp) => ({
+  type: TYPES.FETCH_ACTIVE_FARMING_ROUTE_REQUEST,
+  timestamp,
+});
+
 export const fetchActiveFarmingRouteRequest = (id) => ({
   type: TYPES.FETCH_ACTIVE_FARMING_ROUTE_REQUEST,
   id,

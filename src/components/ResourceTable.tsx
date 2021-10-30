@@ -13,7 +13,7 @@ export const ResourceTable = ({
     <Table variant={"dark"} striped bordered hover>
       <thead>
         <tr>
-          <th></th>
+          <th>Icon</th>
           <th>Item</th>
           <th>Quantity</th>
         </tr>
@@ -37,7 +37,7 @@ export const ResourceTable = ({
               </td>
               <td style={{ verticalAlign: "middle" }}>{resource.quantity}</td>
             </tr>
-          ))}{" "}
+          ))}
       </tbody>
     </Table>
   );
