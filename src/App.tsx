@@ -16,6 +16,7 @@ import { faHourglassEnd } from "@fortawesome/free-solid-svg-icons";
 import { library } from "@fortawesome/fontawesome-svg-core";
 
 library.add(faHourglassEnd);
+const reload = () => window.location.reload();
 
 class App extends React.Component<any, any> {
   componentDidMount() {
@@ -34,6 +35,7 @@ class App extends React.Component<any, any> {
             <Route exact path="/gear-sets" component={GearSet} />
             <Route exact path="/builds" component={Builds} />
             <Route exact path="/farming-routes/:id" component={FarmingRoute} />
+            <Route path="/sitemap.xml" />
           </Switch>
         </ConnectedRouter>
       </Container>
