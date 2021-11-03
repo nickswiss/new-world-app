@@ -2,7 +2,7 @@ import * as TYPES from "../types";
 import initialState from "../initialState";
 
 export const loadingFarmingRoutes = (
-  state = initialState.loadingFarmingRoutes,
+  state = initialState.farmingRoutes.loadingFarmingRoutes,
   action
 ) => {
   switch (action.type) {
@@ -18,7 +18,7 @@ export const loadingFarmingRoutes = (
 };
 
 export const errorLoadingFarmingRoutes = (
-  state = initialState.errorLoadingFarmingRoutes,
+  state = initialState.farmingRoutes.errorLoadingFarmingRoutes,
   action
 ) => {
   switch (action.type) {
@@ -31,7 +31,10 @@ export const errorLoadingFarmingRoutes = (
   }
 };
 
-export const farmingRoutes = (state = initialState.farmingRoutes, action) => {
+export const farmingRoutes = (
+  state = initialState.farmingRoutes.farmingRoutes,
+  action
+) => {
   switch (action.type) {
     case TYPES.FETCH_FARMING_ROUTES_SUCCESS:
       return [...action.data];

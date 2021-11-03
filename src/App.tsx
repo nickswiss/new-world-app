@@ -9,6 +9,13 @@ import { connect } from "react-redux";
 import IconTest from "./components/IconTest";
 import { history } from "./store";
 import { ConnectedRouter } from "connected-react-router";
+import GearSet from "./components/GearSet";
+import Builds from "./components/Builds";
+
+import { faHourglassEnd } from "@fortawesome/free-solid-svg-icons";
+import { library } from "@fortawesome/fontawesome-svg-core";
+
+library.add(faHourglassEnd);
 
 class App extends React.Component<any, any> {
   componentDidMount() {
@@ -24,6 +31,8 @@ class App extends React.Component<any, any> {
             {" "}
             <Route exact path="/jon" component={Jon} />
             <Route exact path="/icons" component={IconTest} />
+            <Route exact path="/gear-sets" component={GearSet} />
+            <Route exact path="/builds" component={Builds} />
             <Route exact path="/farming-routes/:id" component={FarmingRoute} />
           </Switch>
         </ConnectedRouter>

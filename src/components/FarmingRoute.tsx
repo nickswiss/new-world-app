@@ -100,7 +100,7 @@ function mapStateToProps(state) {
     activeTimestamp,
     loadingActiveFarmingRoute,
     loadingInGameItems,
-  } = state;
+  } = state.farmingRoutes;
   return {
     inGameItems,
     activeFarmingRoute,

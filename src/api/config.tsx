@@ -38,7 +38,7 @@ export const getMediaDomain = () => {
   return "https://media.newworlddocs.com";
 };
 
-export const getInitializedApi = (): AxiosInstance => {
+export const getInitializedApi = (baseUrl = ""): AxiosInstance => {
   /*
   Returns an axios client initialized with default values
   Erroring on >500 status so that we can handle our own validation from server
@@ -47,7 +47,7 @@ export const getInitializedApi = (): AxiosInstance => {
     "Content-type": "application/json",
   };
   return axios.create({
-    baseURL: getApiDomain(),
+    baseURL: baseUrl || getApiDomain(),
     responseType: "json",
     withCredentials: false,
     validateStatus: (status: number) => {

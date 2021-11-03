@@ -2,7 +2,7 @@ import * as TYPES from "../types";
 import initialState from "../initialState";
 
 export const activeTimestamp = (
-  state = initialState.activeTimestamp,
+  state = initialState.farmingRoutes.activeTimestamp,
   action
 ) => {
   switch (action.type) {

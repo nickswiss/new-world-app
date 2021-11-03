@@ -1,4 +1,4 @@
-import { configureStore } from "@reduxjs/toolkit";
+import { combineReducers, configureStore } from "@reduxjs/toolkit";
 import { createBrowserHistory } from "history";
 import { connectRouter, routerMiddleware } from "connected-react-router";
 import createSagaMiddleware from "redux-saga";
@@ -31,15 +31,20 @@ import { activeTimestamp } from "./reducers/activeTimestamp";
 export const history = createBrowserHistory();
 const sagaMiddleware = createSagaMiddleware();
 
+const FarmingRouteReducer = combineReducers({
+  activeFarmingRoute,
+  loadingActiveFarmingRoute,
+  errorLoadingActiveFarmingRoute,
+  farmingRoutes,
+  loadingFarmingRoutes,
+  errorLoadingFarmingRoutes,
+});
+
 const store = configureStore({
   reducer: {
     router: connectRouter(history),
-    activeFarmingRoute,
-    loadingActiveFarmingRoute,
-    errorLoadingActiveFarmingRoute,
-    farmingRoutes,
-    loadingFarmingRoutes,
-    errorLoadingFarmingRoutes,
+    farmingRoutes: FarmingRouteReducer,
+
     inGameItems,
     loadingInGameItems,
     errorLoadingInGameItems,

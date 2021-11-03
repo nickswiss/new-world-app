@@ -2,7 +2,7 @@ import * as TYPES from "../types";
 import initialState from "../initialState";
 
 export const loadingActiveFarmingRoute = (
-  state = initialState.loadingActiveFarmingRoute,
+  state = initialState.farmingRoutes.loadingActiveFarmingRoute,
   action
 ) => {
   switch (action.type) {
@@ -18,7 +18,7 @@ export const loadingActiveFarmingRoute = (
 };
 
 export const errorLoadingActiveFarmingRoute = (
-  state = initialState.errorLoadingActiveFarmingRoute,
+  state = initialState.farmingRoutes.errorLoadingActiveFarmingRoute,
   action
 ) => {
   switch (action.type) {
@@ -32,7 +32,7 @@ export const errorLoadingActiveFarmingRoute = (
 };
 
 export const activeFarmingRoute = (
-  state = initialState.activeFarmingRoute,
+  state = initialState.farmingRoutes.activeFarmingRoute,
   action
 ) => {
   switch (action.type) {

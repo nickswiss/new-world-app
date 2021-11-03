@@ -48,10 +48,10 @@ class Header extends React.Component<
 }
 const mapStateToProps = (state) => {
   return {
-    inGameItems: state.inGameItems,
-    loadingInGameItems: state.loadingInGameItems,
-    farmingRoutes: state.farmingRoutes,
-    loadingFarmingRoutes: state.loadingFarmingRoutes,
+    inGameItems: state.farmingRoutes.inGameItems,
+    loadingInGameItems: state.farmingRoutes.loadingInGameItems,
+    farmingRoutes: state.farmingRoutes.farmingRoutes,
+    loadingFarmingRoutes: state.farmingRoutes.loadingFarmingRoutes,
   };
 };
 

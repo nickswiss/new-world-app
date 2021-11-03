@@ -95,10 +95,10 @@ const InfoCard = (props) => {
 
 function mapStateToProps(state) {
   return {
-    resources: state.activeFarmingRoute.resources,
-    run_time: state.activeFarmingRoute.run_time,
-    level_requirement: state.activeFarmingRoute.level_requirement,
-    location: state.activeFarmingRoute.location,
+    resources: state.farmingRoutes.activeFarmingRoute.resources,
+    run_time: state.farmingRoutes.activeFarmingRoute.run_time,
+    level_requirement: state.farmingRoutes.activeFarmingRoute.level_requirement,
+    location: state.farmingRoutes.activeFarmingRoute.location,
     inGameItems: state.inGameItems,
   };
 }
