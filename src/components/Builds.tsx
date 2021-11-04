@@ -1,4 +1,4 @@
-import React from "react";
+import React, { ReactNode } from "react";
 import { objectIsEmpty } from "../lib/utils";
 import {
   Col,
@@ -11,23 +11,96 @@ import {
 import { connect } from "react-redux";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-const MovePopover = (props) => (
-  <Popover id="popover-basic" style={{ backgroundColor: "rgb(10,10,10)" }}>
-    <Popover.Header
-      style={{ backgroundColor: "rgb(10,10,10)", color: "gold" }}
-      as="h3"
-    >
-      Popover right
-    </Popover.Header>
-    <Popover.Body>
-      {/*<Row>*/}
-      {/*  <Col xs={6}>*/}
-      {/*    <img src={props.item.detail} />*/}
-      {/*  </Col>*/}
-      {/*  <Col xs={6}></Col>*/}
-      {/*</Row>*/}
-    </Popover.Body>
-  </Popover>
+const SELECTED = "SELECTED";
+const SELECTABLE = "SELECTABLE";
+const DISABLED = "DISABLED";
+
+interface IMovePopoverProps {
+  children?: ReactNode;
+  item: any;
+}
+
+const MovePopover = React.forwardRef(
+  (props: IMovePopoverProps, ref: React.Ref<HTMLDivElement>) => {
+    return (
+      <Popover ref={ref} body {...props} className={"build-item-popover"}>
+        <Row>
+          <Col>
+            <h3 style={{ color: "var(--gold)", fontFamily: "IM Fell DW Pica" }}>
+              {props.item.name.toUpperCase()}
+            </h3>
+          </Col>
+        </Row>
+        <Row style={{ paddingTop: "2vh", paddingBottom: "2vh" }}>
+          <Col xs={6} style={{ display: "flex", justifyContent: "start" }}>
+            <img
+              style={{
+                height: "90px",
+                width: "90px",
+              }}
+              src={props.item.detail}
+            />
+          </Col>
+          {"cooldown" in props.item && (
+            <Col
+              xs={6}
+              style={{
+                marginTop: "auto",
+                marginBottom: "auto",
+              }}
+            >
+              <Row style={{ height: "18px" }}>
+                <Col xs={12} style={{ height: "100%" }}>
+                  {" "}
+                  <p
+                    style={{
+                      color: "lightgray",
+                      fontFamily: "Arial",
+                      lineHeight: "18px",
+                      fontSize: "18px",
+                    }}
+                  >
+                    Cooldown
+                  </p>
+                </Col>
+              </Row>
+              <Row style={{ height: "20px" }}>
+                <Col xs={12} style={{ height: "100%" }}>
+                  {" "}
+                  <p
+                    style={{
+                      color: "lightgray",
+                      fontFamily: "Arial",
+                      lineHeight: "18px",
+                      fontSize: "18px",
+                    }}
+                  >
+                    <FontAwesomeIcon
+                      color={"white"}
+                      icon={"hourglass-end"}
+                      style={{
+                        paddingRight: "2px",
+                        lineHeight: "20px",
+                        fontSize: "20px",
+                      }}
+                    />
+                    {props.item.cooldown.toFixed(1)}s
+                  </p>
+                </Col>
+              </Row>
+            </Col>
+          )}
+        </Row>
+        <Row>
+          <Col xs={12}>
+            <p style={{ color: "lightgray", fontFamily: "Arial" }}>
+              {props.item.description}
+            </p>
+          </Col>
+        </Row>
+      </Popover>
+    );
+  }
 );
 /*
 
@@ -38,6 +111,41 @@ const MovePopover = (props) => (
  */
 
 class Builds extends React.Component<any, any> {
+  render() {
+    return (
+      <Container fluid>
+        <Row>
+          <Col>
+            <div
+              style={{
+                borderLeft: "1px solid rgb(39, 36, 30)",
+                height: "100%",
+                width: "100%",
+                margin: "auto",
+              }}
+            >
+              <img
+                src={
+                  "https://media.newworlddocs.com/icons/items_hires/2hcelestialstaff_lifet5.png"
+                }
+                style={{ width: "100%" }}
+              />
+            </div>
+          </Col>
+          <Col sm={12} lg={5}>
+            <Build />
+          </Col>
+
+          <Col sm={12} lg={5}>
+            <Build />
+          </Col>
+        </Row>
+      </Container>
+    );
+  }
+}
+
+class Build extends React.Component<any, any> {
   build = [
     // Row 0
     [
@@ -281,66 +389,194 @@ class Builds extends React.Component<any, any> {
   ];
 
   render() {
-    console.log(this.props);
+    let buildState = [
+      [SELECTED, "0", "0", SELECTABLE, "0"],
+      [SELECTED, "0", DISABLED, DISABLED, DISABLED],
+      [SELECTED, DISABLED, DISABLED, DISABLED, DISABLED],
+      [SELECTABLE, "0", DISABLED, DISABLED, DISABLED],
+      [DISABLED, DISABLED, "0", DISABLED, DISABLED],
+    ];
     let rows = this.build.map((row, rowIndex) => (
-      <Row>
+      <Row style={{ height: "128px" }}>
         {row.map((item, columnIndex) => {
-          return <ItemCell item={item} />;
+          /* CRAZY LOGIC HERE */
+          /* TODO: REFACTOR, BUT ITS PURTY */
+          let connectorUpActive = false;
+          let connectorUpLeftActive = false;
+          let connectorUpRightActive = false;
+          let connectorDownActive = false;
+          let connectorDownLeftActive = false;
+          let connectorDownRightActive = false;
+          if (rowIndex === 0) {
+            //first row, only connectors down
+            connectorDownActive = [SELECTED, SELECTABLE].includes(
+              buildState[rowIndex + 1][columnIndex]
+            )
+              ? true
+              : false;
+            if (columnIndex == 0) {
+              // only check up right
+              connectorDownRightActive = [SELECTED, SELECTABLE].includes(
+                buildState[rowIndex + 1][columnIndex + 1]
+              );
+            } else if (columnIndex == buildState[rowIndex].length - 1) {
+              connectorDownLeftActive = [SELECTED, SELECTABLE].includes(
+                buildState[rowIndex + 1][columnIndex - 1]
+              );
+            } else {
+              connectorDownRightActive = [SELECTED, SELECTABLE].includes(
+                buildState[rowIndex + 1][columnIndex + 1]
+              );
+              connectorDownLeftActive = [SELECTED, SELECTABLE].includes(
+                buildState[rowIndex + 1][columnIndex - 1]
+              );
+            }
+          } else if (rowIndex === buildState.length - 1) {
+            // last row, only connectors up
+            connectorUpActive = [SELECTED].includes(
+              buildState[rowIndex - 1][columnIndex]
+            )
+              ? true
+              : false;
+
+            if (columnIndex == 0) {
+              // only check up right
+              connectorUpRightActive = [SELECTED].includes(
+                buildState[rowIndex - 1][columnIndex + 1]
+              );
+            } else if (columnIndex == buildState[rowIndex].length - 1) {
+              connectorUpLeftActive = [SELECTED].includes(
+                buildState[rowIndex - 1][columnIndex - 1]
+              );
+            } else {
+              // in a middle cell, can check all directions
+              connectorUpRightActive = [SELECTED].includes(
+                buildState[rowIndex - 1][columnIndex + 1]
+              );
+
+              connectorUpLeftActive = [SELECTED].includes(
+                buildState[rowIndex - 1][columnIndex - 1]
+              );
+            }
+          } else {
+            // other rows
+            connectorUpActive = [SELECTED].includes(
+              buildState[rowIndex - 1][columnIndex]
+            );
+            connectorDownActive = [SELECTED, SELECTABLE].includes(
+              buildState[rowIndex + 1][columnIndex]
+            );
+
+            if (columnIndex == 0) {
+              // only check up right
+              connectorUpRightActive = [SELECTED].includes(
+                buildState[rowIndex - 1][columnIndex + 1]
+              );
+              connectorDownRightActive = [SELECTED, SELECTABLE].includes(
+                buildState[rowIndex + 1][columnIndex + 1]
+              );
+            } else if (columnIndex == buildState[rowIndex].length - 1) {
+              // only check up left
+              connectorUpLeftActive = [SELECTED].includes(
+                buildState[rowIndex - 1][columnIndex - 1]
+              );
+              connectorDownLeftActive = [SELECTED, SELECTABLE].includes(
+                buildState[rowIndex + 1][columnIndex - 1]
+              );
+            } else {
+              // in a middle cell, can check all directions
+              connectorUpRightActive = [SELECTED].includes(
+                buildState[rowIndex - 1][columnIndex + 1]
+              );
+              connectorDownRightActive = [SELECTED, SELECTABLE].includes(
+                buildState[rowIndex + 1][columnIndex + 1]
+              );
+              connectorUpLeftActive = [SELECTED].includes(
+                buildState[rowIndex - 1][columnIndex - 1]
+              );
+              connectorDownLeftActive = [SELECTED, SELECTABLE].includes(
+                buildState[rowIndex + 1][columnIndex - 1]
+              );
+            }
+          }
+          return (
+            <ItemCell
+              connectorUpActive={connectorUpActive}
+              connectorDownActive={connectorDownActive}
+              connectorDownLeftActive={connectorDownLeftActive}
+              connectorDownRightActive={connectorDownRightActive}
+              connectorUpLeftActive={connectorUpLeftActive}
+              connectorUpRightActive={connectorUpRightActive}
+              rowIndex={rowIndex}
+              columnIndex={columnIndex}
+              cellType={buildState[rowIndex][columnIndex]}
+              item={item}
+            />
+          );
         })}
       </Row>
     ));
-    return <Container>{rows.map((row) => row)}</Container>;
+    return (
+      <Container
+        fluid
+        style={{ minWidth: "770px", border: "1px solid rgb(39, 36, 30)" }}
+      >
+        {rows.map((row) => row)}
+      </Container>
+    );
   }
 }
 
-const ConnectorUp = () => (
+const ConnectorUp = (props) => {
+  return (
+    <div
+      style={{
+        position: "absolute",
+        borderLeft: `4px solid ${props.active ? "rgb(230, 217, 186)" : "grey"}`,
+        width: "1px",
+        height: "50%",
+        left: "50%",
+        zIndex: -20,
+        top: 0,
+      }}
+    />
+  );
+};
+const ConnectorDown = (props) => (
   <div
     style={{
       position: "absolute",
-      borderLeft: "4px solid grey",
+      borderLeft: `4px solid ${props.active ? "rgb(230, 217, 186)" : "grey"}`,
       width: "1px",
       height: "50%",
       left: "50%",
-      zIndex: -20,
-      top: 0,
-    }}
-  />
-);
-const ConnectorDown = () => (
-  <div
-    style={{
-      position: "absolute",
-      borderLeft: "4px solid grey",
-      width: "1px",
-      height: "50%",
-      left: "50%",
-      zIndex: -20,
+      zIndex: -10,
       bottom: 0,
     }}
   />
 );
 
-const ConnectorUpLeft = () => (
+const ConnectorUpLeft = (props) => (
   <div
     style={{
       position: "absolute",
-      borderRight: "4px solid grey",
-      borderTop: "4px solid grey",
+      borderRight: `4px solid ${props.active ? "rgb(230, 217, 186)" : "grey"}`,
+      borderTop: `4px solid ${props.active ? "rgb(230, 217, 186)" : "grey"}`,
       width: "50%",
-      height: "50%",
+      height: "51%",
       right: "50%",
       zIndex: -20,
-      top: 0,
+      top: "-3%",
     }}
   />
 );
 
-const ConnectorUpRight = () => (
+const ConnectorUpRight = (props) => (
   <div
     style={{
       position: "absolute",
-      borderLeft: "4px solid grey",
-      borderTop: "4px solid grey",
+      borderLeft: `4px solid ${props.active ? "rgb(230, 217, 186)" : "grey"}`,
+      borderTop: `4px solid ${props.active ? "rgb(230, 217, 186)" : "grey"}`,
       width: "50%",
       height: "50%",
       left: "50%",
@@ -350,27 +586,27 @@ const ConnectorUpRight = () => (
   />
 );
 
-const ConnectorDownRight = () => (
+const ConnectorDownRight = (props) => (
   <div
     style={{
       position: "absolute",
-      borderLeft: "4px solid grey",
-      borderBottom: "4px solid grey",
+      borderLeft: `4px solid ${props.active ? "rgb(230, 217, 186)" : "grey"}`,
+      borderBottom: `4px solid ${props.active ? "rgb(230, 217, 186)" : "grey"}`,
       width: "50%",
       height: "50%",
       left: "50%",
       zIndex: -20,
-      top: "53%",
+      top: "50%",
     }}
   />
 );
 
-const ConnectorDownLeft = () => (
+const ConnectorDownLeft = (props) => (
   <div
     style={{
       position: "absolute",
-      borderLeft: "4px solid grey",
-      borderBottom: "4px solid grey",
+      borderLeft: `4px solid ${props.active ? "rgb(230, 217, 186)" : "grey"}`,
+      borderBottom: `4px solid ${props.active ? "rgb(230, 217, 186)" : "grey"}`,
       width: "50%",
       height: "50%",
       left: "50%",
@@ -380,25 +616,60 @@ const ConnectorDownLeft = () => (
   />
 );
 
-let Connector = (props) => ({
-  up: () => <ConnectorUp {...props} />,
-  down: () => <ConnectorDown {...props} />,
-  upRight: () => <ConnectorUpRight {...props} />,
-  upLeft: () => <ConnectorUpLeft {...props} />,
-  downLeft: () => <ConnectorDownLeft {...props} />,
-  downRight: () => <ConnectorDownRight {...props} />,
-});
+let Connector = (props) => {
+  console.log(props);
+  return {
+    up: () => <ConnectorUp active={props.connectorUpActive} />,
+    down: () => <ConnectorDown active={props.connectorDownActive} />,
+    upRight: () => <ConnectorUpRight active={props.connectorUpRightActive} />,
+    upLeft: () => <ConnectorUpLeft active={props.connectorUpLeftActive} />,
+    downLeft: () => (
+      <ConnectorDownLeft active={props.connectorDownLeftActive} />
+    ),
+    downRight: () => (
+      <ConnectorDownRight active={props.connectorDownRightActive} />
+    ),
+  };
+};
 
 const ItemCell = (props) => {
   let inactiveBorder = "2px solid rgb(107,179,218)";
   let activeBorder = "3px solid rgb(230, 217, 186)";
 
-  let itemStyle = {
-    border: props.item.active ? activeBorder : inactiveBorder,
-    margin: "auto",
-    backgroundImage: `url(${props.item.background})`,
-  };
-
+  /* selected */
+  /* selectable */
+  /* disabled */
+  let itemStyle = {};
+  switch (props.cellType) {
+    case SELECTED:
+      itemStyle = {
+        border: activeBorder,
+        margin: "auto",
+        backgroundImage: `url(${props.item.background})`,
+      };
+      break;
+    case SELECTABLE:
+      itemStyle = {
+        border: inactiveBorder,
+        margin: "auto",
+        backgroundImage: `url(${props.item.background})`,
+      };
+      break;
+    case DISABLED:
+      itemStyle = {
+        border: "2px solid grey",
+        margin: "auto",
+        backgroundColor: "black",
+      };
+      break;
+    default:
+      itemStyle = {
+        border: props.item.active ? activeBorder : inactiveBorder,
+        margin: "auto",
+        backgroundImage: `url(${props.item.background})`,
+      };
+      break;
+  }
   if (objectIsEmpty(props.item)) {
     return <Col style={{ width: "128px", height: "128px" }} />;
   }
@@ -422,91 +693,12 @@ const ItemCell = (props) => {
         >
           {connectors}
           <OverlayTrigger
-            placement="right"
-            trigger={"click"}
-            overlay={
-              <Popover
-                id="popover-basic"
-                style={{
-                  backgroundColor: "rgb(10,10,10)",
-                  fontFamily: "IM Fell DW Pica",
-                }}
-              >
-                <Popover.Header
-                  style={{
-                    backgroundColor: "rgb(10,10,10)",
-                    color: "rgb(142,131,112)",
-                    fontSize: "24px",
-                    paddingBottom: "0",
-                  }}
-                  as="h1"
-                >
-                  {props.item.name.toUpperCase()}
-                </Popover.Header>
-                <Popover.Body>
-                  <Row>
-                    <Col xs={6}>
-                      <img style={{ margin: "auto" }} src={props.item.detail} />
-                    </Col>
-                    <Col
-                      xs={6}
-                      style={{
-                        height: "100px",
-                        marginTop: "auto",
-                        marginBottom: "auto",
-                      }}
-                    >
-                      <Row>
-                        <Col xs={12}>
-                          {" "}
-                          <p
-                            style={{
-                              textAlign: "center",
-                              color: "lightgray",
-                              fontFamily: "Arial",
-                              lineHeight: "16px",
-                              fontSize: "16px",
-                            }}
-                          >
-                            Cooldown
-                          </p>
-                        </Col>
-                      </Row>
-                      <Row>
-                        <Col xs={12}>
-                          {" "}
-                          <p
-                            style={{
-                              textAlign: "center",
-                              color: "lightgray",
-                              fontFamily: "Arial",
-                              lineHeight: "16px",
-                              fontSize: "16px",
-                            }}
-                          >
-                            <FontAwesomeIcon
-                              color={"white"}
-                              icon={"hourglass-end"}
-                              style={{ paddingRight: "2px" }}
-                            />
-                            {props.item.cooldown.toFixed(1)}s
-                          </p>
-                        </Col>
-                      </Row>
-                    </Col>
-                  </Row>
-                  <Row>
-                    <Col xs={12}>
-                      <p style={{ color: "lightgray", fontFamily: "Arial" }}>
-                        {props.item.description}
-                      </p>
-                    </Col>
-                  </Row>
-                </Popover.Body>
-              </Popover>
-            }
+            placement={"left"}
+            trigger={["hover", "click"]}
+            overlay={<MovePopover item={props.item} />}
           >
             <div
+              className={"hover-move-expand"}
               style={{
                 ...itemStyle,
                 width: "96px",
@@ -548,24 +740,31 @@ const ItemCell = (props) => {
           }}
         >
           {connectors}
-          <div
-            style={{
-              ...itemStyle,
-              width: "64px",
-              height: "64px",
-              borderRadius: "50%",
-              backgroundColor: "black",
-            }}
+          <OverlayTrigger
+            placement="right"
+            trigger={"hover"}
+            overlay={<MovePopover item={props.item} />}
           >
-            <img
-              src={props.item.detail}
+            <div
+              className={"hover-passive-expand"}
               style={{
-                left: "-2",
-                width: "100%",
-                height: "100%",
+                ...itemStyle,
+                width: "64px",
+                height: "64px",
+                borderRadius: "50%",
+                backgroundColor: "black",
               }}
-            />
-          </div>
+            >
+              <img
+                src={props.item.detail}
+                style={{
+                  left: "-2",
+                  width: "100%",
+                  height: "100%",
+                }}
+              />
+            </div>
+          </OverlayTrigger>
         </Col>
       );
     default:
