@@ -29,10 +29,6 @@ const FarmingRouteContainer = (props) => (
 );
 
 class FarmingRoutes extends React.Component<any, {}> {
-  constructor(props) {
-    super(props);
-  }
-
   componentDidMount() {
     this.props.loadActiveRoute(this.props.match.params.id);
   }

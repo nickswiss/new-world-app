@@ -16,7 +16,6 @@ import { faHourglassEnd } from "@fortawesome/free-solid-svg-icons";
 import { library } from "@fortawesome/fontawesome-svg-core";
 
 library.add(faHourglassEnd);
-const reload = () => window.location.reload();
 
 class App extends React.Component<any, any> {
   componentDidMount() {

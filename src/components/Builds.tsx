@@ -1,13 +1,6 @@
 import React, { ReactNode } from "react";
 import { objectIsEmpty } from "../lib/utils";
-import {
-  Col,
-  Container,
-  OverlayTrigger,
-  Popover,
-  Row,
-  Spinner,
-} from "react-bootstrap";
+import { Col, Container, OverlayTrigger, Popover, Row } from "react-bootstrap";
 import { connect } from "react-redux";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
@@ -34,6 +27,7 @@ const MovePopover = React.forwardRef(
         <Row style={{ paddingTop: "2vh", paddingBottom: "2vh" }}>
           <Col xs={6} style={{ display: "flex", justifyContent: "start" }}>
             <img
+              alt={"popover-detail"}
               style={{
                 height: "90px",
                 width: "90px",
@@ -111,33 +105,561 @@ const MovePopover = React.forwardRef(
  */
 
 class Builds extends React.Component<any, any> {
+  buildConfig = {
+    one: {
+      buildState: [
+        [DISABLED, "0", "0", SELECTED, "0"],
+        [DISABLED, "0", SELECTED, SELECTED, DISABLED],
+        [DISABLED, SELECTED, SELECTED, SELECTED, SELECTED],
+        [DISABLED, "0", SELECTED, DISABLED, SELECTED],
+        [DISABLED, SELECTED, "0", SELECTED, SELECTED],
+        [DISABLED, DISABLED, SELECTED, DISABLED, DISABLED],
+      ],
+      heading: "HEALING",
+      build: [
+        // Row 0
+        [
+          {
+            detail:
+              "https://media.newworlddocs.com/icons/abilities/lifestaffability3.png",
+            background:
+              "https://media.newworlddocs.com/icons/abilities/abilities_bg2.png",
+            backgroundColor: "black",
+            type: "move",
+            active: true,
+            disabled: true,
+            name: "Divine Embrace",
+            description: "Heal target for 150% weapon damage",
+            manaCost: "Costs 25 mana",
+            cooldown: 6.0,
+            connectors: ["down"],
+          },
+          {},
+          {},
+          {
+            detail:
+              "https://media.newworlddocs.com/icons/abilities/lifestaffability6_mod2.png",
+            background:
+              "https://media.newworlddocs.com/icons/abilities/abilities_bg_passive6.png",
+            type: "passive",
+            active: false,
+            description:
+              "Light staffs Light and Heavy attack no longer take mana",
+            name: "Absolved",
+            connectors: ["down", "downRight"],
+          },
+          {},
+        ],
+        // Row 1 (0 indexed)
+        [
+          {
+            detail:
+              "https://media.newworlddocs.com/icons/abilities/lifestaffability3_mod1.png",
+            background:
+              "https://media.newworlddocs.com/icons/abilities/abilities_bg_passive5.png",
+            type: "passive",
+            active: false,
+            description: "Divine Embrace costs 20 mana",
+            name: "Privilege",
+            connectors: ["up", "down"],
+          },
+          {},
+          {
+            detail:
+              "https://media.newworlddocs.com/icons/abilities/lifestaffability2.png",
+            background:
+              "https://media.newworlddocs.com/icons/abilities/abilities_bg6.png",
+            type: "move",
+            active: true,
+            name: "Sacred ground",
+            description:
+              "Create an area on the ground that lasts for 15 seconds and heals for 20% weapon damage every second",
+            manaCost: "Costs 15 mana",
+            cooldown: 20.0,
+            connectors: ["down"],
+          },
+          {
+            detail:
+              "https://media.newworlddocs.com/icons/abilities/lifestaffpassive11.png",
+            background:
+              "https://media.newworlddocs.com/icons/abilities/abilities_bg_passive0.png",
+            type: "passive",
+            active: false,
+            description:
+              "Lifestaffs Heavy Attack now removes one debuff when passing through an ally",
+            name: "Mending Touch",
+
+            connectors: ["up"],
+          },
+          {
+            detail:
+              "https://media.newworlddocs.com/icons/abilities/warhammerpassive8.png",
+            background:
+              "https://media.newworlddocs.com/icons/abilities/abilities_bg_passive6.png",
+            type: "passive",
+            active: false,
+            name: "Blissful Touch",
+            description:
+              "Light attacks now heal target for 20% weapon damage when passing through an ally",
+            connectors: ["upLeft"],
+          },
+        ],
+        // Row 2 (0 indexed)
+        [
+          { type: "connector", connectors: ["up", "down"] },
+          {
+            detail:
+              "https://media.newworlddocs.com/icons/abilities/lifestaffpassive3.png",
+            background:
+              "https://media.newworlddocs.com/icons/abilities/abilities_bg_passive0.png",
+            type: "passive",
+            active: false,
+
+            name: "Desperate Speed",
+          },
+          {
+            detail:
+              "https://media.newworlddocs.com/icons/abilities/lifestaffability6.png",
+            background:
+              "https://media.newworlddocs.com/icons/abilities/abilities_bg_passive0.png",
+            type: "passive",
+            active: false,
+
+            name: "Holy Ground",
+
+            connectors: ["up", "down"],
+          },
+          {
+            detail:
+              "https://media.newworlddocs.com/icons/abilities/lifestaffpassive2.png",
+            background:
+              "https://media.newworlddocs.com/icons/abilities/abilities_bg_passive0.png",
+            type: "passive",
+            active: false,
+            name: "Revitalize",
+          },
+          {
+            detail:
+              "https://media.newworlddocs.com/icons/abilities/lifestaffpassive5.png",
+            background:
+              "https://media.newworlddocs.com/icons/abilities/abilities_bg6.png",
+            type: "move",
+            active: true,
+            name: "Splash of Light",
+            description: "Heal target for 150% weapon damage",
+            manaCost: "Costs 25 mana",
+            cooldown: 6.0,
+
+            connectors: ["down"],
+          },
+        ],
+        // Row 3 (0 indexed)
+        [
+          {
+            detail:
+              "https://media.newworlddocs.com/icons/abilities/hatchetpassive5.png",
+            background:
+              "https://media.newworlddocs.com/icons/abilities/abilities_bg_passive0.png",
+            type: "passive",
+            active: false,
+
+            name: "Shared Struggle",
+            description:
+              "If target is below 50 percent health heal one additional ally within 8m for the same amount",
+
+            connectors: ["up", "down"],
+          },
+          {},
+          {
+            detail:
+              "https://media.newworlddocs.com/icons/abilities/lifestaffability6_mod1.png",
+            background:
+              "https://media.newworlddocs.com/icons/abilities/abilities_bg_passive0.png",
+            type: "passive",
+            active: false,
+            description:
+              "When allies are in Sacred Ground they are healed for 50% more from all healing",
+            name: "Blessed",
+
+            connectors: ["up"],
+          },
+          {
+            detail:
+              "https://media.newworlddocs.com/icons/abilities/lifestaffpassive6.png",
+            background:
+              "https://media.newworlddocs.com/icons/abilities/abilities_bg_passive0.png",
+            type: "passive",
+            active: false,
+            description:
+              "When hit in battle activate a healing aura for you and nearby friends in a 4m radius healing for 10% weapon damage each second for 6s. (cooldown 120s)",
+            name: "Enchanted Justice",
+          },
+          {
+            detail:
+              "https://media.newworlddocs.com/icons/abilities/lifestaffability1.png",
+            background:
+              "https://media.newworlddocs.com/icons/abilities/abilities_bg_passive0.png",
+            type: "passive",
+            active: false,
+            description:
+              "If you heal a target below 50% health gain 3% of your max mana",
+            name: "Shared Recovery",
+
+            connectors: ["up", "down"],
+          },
+        ],
+        // Row 4 (0 indexed)
+        [
+          {
+            detail:
+              "https://media.newworlddocs.com/icons/abilities/hatchetability3_mod2.png",
+            background:
+              "https://media.newworlddocs.com/icons/abilities/abilities_bg_passive0.png",
+            type: "passive",
+            active: false,
+            description:
+              "If 2nd target is below 50% health heal another ally within 8m of that ally",
+            name: "Rebound",
+
+            connectors: ["up"],
+          },
+          {
+            detail:
+              "https://media.newworlddocs.com/icons/abilities/lifestaffpassive1.png",
+            background:
+              "https://media.newworlddocs.com/icons/abilities/abilities_bg_passive0.png",
+            type: "passive",
+            active: false,
+            description:
+              "While holding a lifestaff: increase the amount of incoming healing to all friendlies in your group by 5%",
+            name: "Sacred Protection",
+          },
+          {},
+          {
+            detail:
+              "https://media.newworlddocs.com/icons/abilities/swordpassive10.png",
+            background:
+              "https://media.newworlddocs.com/icons/abilities/abilities_bg_passive0.png",
+            type: "passive",
+            active: false,
+            name: "Intensify",
+          },
+          {
+            detail:
+              "https://media.newworlddocs.com/icons/abilities/rapier_evasionpass1_perfectionist.png",
+            background:
+              "https://media.newworlddocs.com/icons/abilities/abilities_bg_passive0.png",
+            type: "passive",
+            active: false,
+
+            name: "Mending Touch",
+
+            connectors: ["up"],
+          },
+        ],
+        [
+          {},
+          {},
+          {
+            detail:
+              "https://media.newworlddocs.com/icons/abilities/lifestaffpassive8.png",
+            background:
+              "https://media.newworlddocs.com/icons/abilities/abilities_bg_passive0.png",
+            type: "final",
+            active: false,
+            description:
+              "If you successfully heal an ally with Orb of Protection, you also gain Fortify, and Recovery",
+            name: "Shared Protection",
+
+            connectors: [],
+          },
+          {},
+          {},
+        ],
+      ],
+    },
+    two: {
+      buildState: [
+        [DISABLED, SELECTED, DISABLED, SELECTABLE, "0"],
+        [DISABLED, "0", "0", SELECTED, DISABLED],
+        [DISABLED, SELECTED, SELECTED, DISABLED, DISABLED],
+        [DISABLED, "0", SELECTED, DISABLED, DISABLED],
+        ["0", SELECTED, DISABLED, DISABLED, DISABLED],
+        ["0", DISABLED, DISABLED, DISABLED, DISABLED],
+      ],
+      heading: "PROTECTOR",
+      build: [
+        // Row 0
+        [
+          {
+            detail:
+              "https://media.newworlddocs.com/icons/abilities/firestaffability1.png",
+            background:
+              "https://media.newworlddocs.com/icons/abilities/abilities_bg2.png",
+            backgroundColor: "black",
+            type: "move",
+            name: "Orb of Protection",
+            description:
+              "Shoot out a light projectile that grants 10% Fortify for 20s, heals an ally for 10% of weapon damage and deals 146% weapon damage when it hits an enemy. (Fortify reduces incoming damage.)",
+            manaCost: "Costs 25 mana",
+            cooldown: 10.0,
+            costs: "16 mana",
+            connectors: ["down"],
+          },
+          {
+            detail:
+              "https://media.newworlddocs.com/icons/abilities/bowpassive5.png",
+            background:
+              "https://media.newworlddocs.com/icons/abilities/abilities_bg2.png",
+            type: "passive",
+            name: "Bend Light",
+            description:
+              "After a dodge, your heals are 20% more effective for 5s.",
+            connectors: [],
+          },
+          {
+            detail:
+              "https://media.newworlddocs.com/icons/abilities/lifestaffability3_mod2.png",
+            background:
+              "https://media.newworlddocs.com/icons/abilities/abilities_bg2.png",
+            type: "passive",
+            name: "Defensive Light",
+            description: "When you block a Melee attack: gain 5% max mana",
+            connectors: [],
+          },
+          {},
+          {},
+        ],
+        // Row 1 (0 indexed)
+        [
+          {
+            detail:
+              "https://media.newworlddocs.com/icons/abilities/firestaffability1_mod2.png",
+            background:
+              "https://media.newworlddocs.com/icons/abilities/abilities_bg_passive5.png",
+            type: "passive",
+            description:
+              "If Orb of Protection hit an ally they gain Recovery for 10s. (Recovery heals for 7.5% weapon damage every second.)",
+            name: "Protector's Blessing",
+            connectors: ["up", "down"],
+          },
+          {},
+          {},
+          {
+            detail:
+              "https://media.newworlddocs.com/icons/abilities/warhammerpassive5.png",
+            background:
+              "https://media.newworlddocs.com/icons/abilities/abilities_bg_passive0.png",
+            type: "passive",
+            description:
+              "Lifestaffs Light and Heavy Attack grant 15% Fortify for 3s when hitting an enemy. (Fortify reduces incoming damage.)",
+            name: "Protector's Touch",
+
+            connectors: [],
+          },
+          {
+            detail:
+              "https://media.newworlddocs.com/icons/abilities/hatchetpassive3.png",
+            background:
+              "https://media.newworlddocs.com/icons/abilities/abilities_bg2.png",
+            backgroundColor: "black",
+            type: "move",
+            name: "Beacon",
+            description:
+              "Shoot out a light projectile that deals 146% weapon damage to enemies, attaches to its target and heals all nearby allies for 20% weapon damage each second for 10s",
+            manaCost: "Costs 16 mana",
+            cooldown: 35.0,
+            costs: "16 mana",
+            connectors: ["down"],
+          },
+        ],
+        // Row 2 (0 indexed)
+        [
+          {
+            detail:
+              "https://media.newworlddocs.com/icons/abilities/lifestaffpassive8.png",
+            background:
+              "https://media.newworlddocs.com/icons/abilities/abilities_bg_passive0.png",
+            type: "passive",
+            active: false,
+            description:
+              "If you successfully heal an ally with Orb of Protection, you also gain Fortify, and Recovery",
+            name: "Shared Protection",
+
+            connectors: ["up", "down"],
+          },
+          {
+            detail:
+              "https://media.newworlddocs.com/icons/abilities/lifestaffpassive8.png",
+            background:
+              "https://media.newworlddocs.com/icons/abilities/abilities_bg_passive0.png",
+            type: "passive",
+            active: false,
+            description: "If you have a buff, heal for 10% or more.",
+            name: "Protector's Strength",
+            connectors: [],
+          },
+          {
+            detail:
+              "https://media.newworlddocs.com/icons/abilities/lifestaffability4_mod3.png",
+            background:
+              "https://media.newworlddocs.com/icons/abilities/abilities_bg2.png",
+            backgroundColor: "black",
+            type: "move",
+            name: "Lights Embrace",
+            description:
+              "Targeted heal for 100% weapon damage +30% more for each buff on that target.",
+            manaCost: "Costs 18 mana",
+            cooldown: 4.0,
+            costs: "18 mana",
+            connectors: ["down"],
+          },
+          {},
+          {
+            detail:
+              "https://media.newworlddocs.com/icons/abilities/lifestaffability3_mod2.png",
+            background:
+              "https://media.newworlddocs.com/icons/abilities/abilities_bg2.png",
+            type: "passive",
+            name: "Infused Light",
+            description: "Beacon's area of effect is now 50% larger.",
+            connectors: ["up", "down"],
+          },
+        ],
+        // Row 3 (0 indexed)
+        [
+          {
+            detail:
+              "https://media.newworlddocs.com/icons/abilities/firestaffability3_mod2.png",
+            background:
+              "https://media.newworlddocs.com/icons/abilities/abilities_bg2.png",
+            type: "passive",
+            name: "Aegis",
+            description:
+              "When this projectile hits, it effects all allies within a 3m radius.",
+            connectors: ["up"],
+          },
+          {},
+          {
+            detail:
+              "https://media.newworlddocs.com/icons/abilities/spear_cyclone_bonusstaminaonmultihit.png",
+            background:
+              "https://media.newworlddocs.com/icons/abilities/abilities_bg2.png",
+            type: "passive",
+            name: "Inspire",
+            description:
+              "When you heal a target with Light's Embrace target receives 25 stamina.",
+            connectors: ["up", "down"],
+          },
+          {
+            detail:
+              "https://media.newworlddocs.com/icons/abilities/musketpassive8.png",
+            background:
+              "https://media.newworlddocs.com/icons/abilities/abilities_bg2.png",
+            type: "passive",
+            name: "Balance",
+            description:
+              "When you get hit while below 50% health, gain 10% Haste for 5s. (cooldown 20s)",
+            connectors: [],
+          },
+          {
+            detail:
+              "https://media.newworlddocs.com/icons/abilities/lifestaffpassive7.png",
+            background:
+              "https://media.newworlddocs.com/icons/abilities/abilities_bg2.png",
+            type: "passive",
+            name: "Radiance's Blessing",
+            description: "Beacon lasts 5s longer",
+            connectors: ["up", "down"],
+          },
+        ],
+        // Row 4 (0 indexed)
+        [
+          {},
+          {
+            detail:
+              "https://media.newworlddocs.com/icons/abilities/lifestaffpassive7.png",
+            background:
+              "https://media.newworlddocs.com/icons/abilities/abilities_bg_passive0.png",
+            type: "passive",
+            active: false,
+            description:
+              "Increases mana regeneration for you and group members by 3%",
+            name: "Spirits United",
+
+            connectors: [],
+          },
+          {
+            detail:
+              "https://media.newworlddocs.com/icons/abilities/warhammerability5.png",
+            background:
+              "https://media.newworlddocs.com/icons/abilities/abilities_bg_passive0.png",
+            type: "passive",
+            active: false,
+            description:
+              "When you heal a target with Lights Embrace gain 1% of your max mana for each buff your target has.",
+            name: "Connection",
+            connectors: ["up", "down"],
+          },
+          {
+            detail:
+              "https://media.newworlddocs.com/icons/abilities/musketability3_mod2.png",
+            background:
+              "https://media.newworlddocs.com/icons/abilities/abilities_bg_passive0.png",
+            type: "passive",
+            description: "Buffs you grant last 20% longer",
+            name: "Glowing Focus",
+          },
+          {
+            detail:
+              "https://media.newworlddocs.com/icons/abilities/hatchetability4_mod1.png",
+            background:
+              "https://media.newworlddocs.com/icons/abilities/abilities_bg_passive0.png",
+            type: "passive",
+
+            name: "Speed of Light1",
+            description:
+              "When Beacon heals a target it also applies 20% Haste for 4s. (Haste increases movement speed.)",
+            connectors: ["up"],
+          },
+        ],
+        [
+          {},
+          {},
+          {
+            detail:
+              "https://media.newworlddocs.com/icons/abilities/lifestaffpassive8.png",
+            background:
+              "https://media.newworlddocs.com/icons/abilities/abilities_bg_passive0.png",
+            type: "final",
+            active: false,
+            description:
+              "If you successfully heal an ally with Orb of Protection, you also gain Fortify, and Recovery",
+            name: "Shared Protection",
+
+            connectors: ["up"],
+          },
+          {},
+          {},
+        ],
+      ],
+    },
+  };
+
   render() {
     return (
       <Container fluid>
-        <Row>
-          <Col>
-            <div
-              style={{
-                borderLeft: "1px solid rgb(39, 36, 30)",
-                height: "100%",
-                width: "100%",
-                margin: "auto",
-              }}
-            >
-              <img
-                src={
-                  "https://media.newworlddocs.com/icons/items_hires/2hcelestialstaff_lifet5.png"
-                }
-                style={{ width: "100%" }}
-              />
-            </div>
-          </Col>
-          <Col sm={12} lg={5}>
-            <Build />
+        <Row
+          style={{
+            padding: "2vh",
+          }}
+        >
+          <Col sm={12} lg={6}>
+            <Build buildConfig={this.buildConfig.one} />
           </Col>
 
-          <Col sm={12} lg={5}>
-            <Build />
+          <Col sm={12} lg={6}>
+            <Build buildConfig={this.buildConfig.two} />
           </Col>
         </Row>
       </Container>
@@ -146,258 +668,17 @@ class Builds extends React.Component<any, any> {
 }
 
 class Build extends React.Component<any, any> {
-  build = [
-    // Row 0
-    [
-      {
-        detail:
-          "https://media.newworlddocs.com/icons/abilities/lifestaffability3.png",
-        background:
-          "https://media.newworlddocs.com/icons/abilities/abilities_bg2.png",
-        backgroundColor: "black",
-        type: "move",
-        active: true,
-        disabled: true,
-        name: "Divine Embrace",
-        description: "Heal target for 150% weapon damage",
-        manaCost: "Costs 25 mana",
-        cooldown: 6.0,
-        connectors: ["down"],
-      },
-      {},
-      {},
-      {
-        detail:
-          "https://media.newworlddocs.com/icons/abilities/lifestaffability6_mod2.png",
-        background:
-          "https://media.newworlddocs.com/icons/abilities/abilities_bg_passive6.png",
-        type: "passive",
-        active: false,
-        description: "Light staffs Light and Heavy attack no longer take mana",
-        name: "Absolved",
-        connectors: ["down", "downRight"],
-      },
-      {},
-    ],
-    // Row 1 (0 indexed)
-    [
-      {
-        detail:
-          "https://media.newworlddocs.com/icons/abilities/lifestaffability3_mod1.png",
-        background:
-          "https://media.newworlddocs.com/icons/abilities/abilities_bg_passive5.png",
-        type: "passive",
-        active: false,
-        description: "Divine Embrace costs 20 mana",
-        name: "Privilege",
-        connectors: ["up", "down"],
-      },
-      {},
-      {
-        detail:
-          "https://media.newworlddocs.com/icons/abilities/lifestaffability2.png",
-        background:
-          "https://media.newworlddocs.com/icons/abilities/abilities_bg6.png",
-        type: "move",
-        active: true,
-        name: "Sacred ground",
-        description:
-          "Create an area on the ground that lasts for 15 seconds and heals for 20% weapon damage every second",
-        manaCost: "Costs 15 mana",
-        cooldown: 20.0,
-        connectors: ["down"],
-      },
-      {
-        detail:
-          "https://media.newworlddocs.com/icons/abilities/lifestaffpassive11.png",
-        background:
-          "https://media.newworlddocs.com/icons/abilities/abilities_bg_passive0.png",
-        type: "passive",
-        active: false,
-        description:
-          "Lifestaffs Heavy Attack now removes one debuff when passing through an ally",
-        name: "Mending Touch",
-
-        connectors: ["up"],
-      },
-      {
-        detail:
-          "https://media.newworlddocs.com/icons/abilities/warhammerpassive8.png",
-        background:
-          "https://media.newworlddocs.com/icons/abilities/abilities_bg_passive6.png",
-        type: "passive",
-        active: false,
-        name: "Blissful Touch",
-        description:
-          "Light attacks now heal target for 20% weapon damage when passing through an ally",
-        connectors: ["upLeft"],
-      },
-    ],
-    // Row 2 (0 indexed)
-    [
-      { type: "connector", connectors: ["up", "down"] },
-      {
-        detail:
-          "https://media.newworlddocs.com/icons/abilities/lifestaffpassive3.png",
-        background:
-          "https://media.newworlddocs.com/icons/abilities/abilities_bg_passive0.png",
-        type: "passive",
-        active: false,
-
-        name: "Desperate Speed",
-      },
-      {
-        detail:
-          "https://media.newworlddocs.com/icons/abilities/lifestaffability6.png",
-        background:
-          "https://media.newworlddocs.com/icons/abilities/abilities_bg_passive0.png",
-        type: "passive",
-        active: false,
-
-        name: "Holy Ground",
-
-        connectors: ["up", "down"],
-      },
-      {
-        detail:
-          "https://media.newworlddocs.com/icons/abilities/lifestaffpassive2.png",
-        background:
-          "https://media.newworlddocs.com/icons/abilities/abilities_bg_passive0.png",
-        type: "passive",
-        active: false,
-        name: "Revitalize",
-      },
-      {
-        detail:
-          "https://media.newworlddocs.com/icons/abilities/lifestaffpassive5.png",
-        background:
-          "https://media.newworlddocs.com/icons/abilities/abilities_bg6.png",
-        type: "move",
-        active: true,
-        name: "Splash of Light",
-        description: "Heal target for 150% weapon damage",
-        manaCost: "Costs 25 mana",
-        cooldown: 6.0,
-
-        connectors: ["down"],
-      },
-    ],
-    // Row 3 (0 indexed)
-    [
-      {
-        detail:
-          "https://media.newworlddocs.com/icons/abilities/hatchetpassive5.png",
-        background:
-          "https://media.newworlddocs.com/icons/abilities/abilities_bg_passive0.png",
-        type: "passive",
-        active: false,
-
-        name: "Shared Struggle",
-        description:
-          "If target is below 50 percent health heal one additional ally within 8m for the same amount",
-
-        connectors: ["up", "down"],
-      },
-      {},
-      {
-        detail:
-          "https://media.newworlddocs.com/icons/abilities/lifestaffability6_mod1.png",
-        background:
-          "https://media.newworlddocs.com/icons/abilities/abilities_bg_passive0.png",
-        type: "passive",
-        active: false,
-        description:
-          "When allies are in Sacred Ground they are healed for 50% more from all healing",
-        name: "Blessed",
-
-        connectors: ["up"],
-      },
-      {
-        detail:
-          "https://media.newworlddocs.com/icons/abilities/lifestaffpassive6.png",
-        background:
-          "https://media.newworlddocs.com/icons/abilities/abilities_bg_passive0.png",
-        type: "passive",
-        active: false,
-        description:
-          "When hit in battle activate a healing aura for you and nearby friends in a 4m radius healing for 10% weapon damage each second for 6s. (cooldown 120s)",
-        name: "Enchanted Justice",
-      },
-      {
-        detail:
-          "https://media.newworlddocs.com/icons/abilities/lifestaffability1.png",
-        background:
-          "https://media.newworlddocs.com/icons/abilities/abilities_bg_passive0.png",
-        type: "passive",
-        active: false,
-        description:
-          "If you heal a target below 50% health gain 3% of your max mana",
-        name: "Shared Recovery",
-
-        connectors: ["up", "down"],
-      },
-    ],
-    // Row 4 (0 indexed)
-    [
-      {
-        detail:
-          "https://media.newworlddocs.com/icons/abilities/hatchetability3_mod2.png",
-        background:
-          "https://media.newworlddocs.com/icons/abilities/abilities_bg_passive0.png",
-        type: "passive",
-        active: false,
-        description:
-          "If 2nd target is below 50% health heal another ally within 8m of that ally",
-        name: "Rebound",
-
-        connectors: ["up"],
-      },
-      {
-        detail:
-          "https://media.newworlddocs.com/icons/abilities/lifestaffpassive1.png",
-        background:
-          "https://media.newworlddocs.com/icons/abilities/abilities_bg_passive0.png",
-        type: "passive",
-        active: false,
-        description:
-          "While holding a lifestaff: increase the amount of incoming healing to all friendlies in your group by 5%",
-        name: "Sacred Protection",
-      },
-      {},
-      {
-        detail:
-          "https://media.newworlddocs.com/icons/abilities/swordpassive10.png",
-        background:
-          "https://media.newworlddocs.com/icons/abilities/abilities_bg_passive0.png",
-        type: "passive",
-        active: false,
-        name: "Intensify",
-      },
-      {
-        detail:
-          "https://media.newworlddocs.com/icons/abilities/rapier_evasionpass1_perfectionist.png",
-        background:
-          "https://media.newworlddocs.com/icons/abilities/abilities_bg_passive0.png",
-        type: "passive",
-        active: false,
-
-        name: "Mending Touch",
-
-        connectors: ["up"],
-      },
-    ],
-  ];
-
   render() {
-    let buildState = [
-      [SELECTED, "0", "0", SELECTABLE, "0"],
-      [SELECTED, "0", DISABLED, DISABLED, DISABLED],
-      [SELECTED, DISABLED, DISABLED, DISABLED, DISABLED],
-      [SELECTABLE, "0", DISABLED, DISABLED, DISABLED],
-      [DISABLED, DISABLED, "0", DISABLED, DISABLED],
-    ];
-    let rows = this.build.map((row, rowIndex) => (
-      <Row style={{ height: "128px" }}>
+    let buildState = this.props.buildConfig.buildState;
+    let rows = this.props.buildConfig.build.map((row, rowIndex) => (
+      <Row
+        style={{
+          height:
+            rowIndex === this.props.buildConfig.build.length - 1
+              ? "164px"
+              : "128px",
+        }}
+      >
         {row.map((item, columnIndex) => {
           /* CRAZY LOGIC HERE */
           /* TODO: REFACTOR, BUT ITS PURTY */
@@ -411,15 +692,13 @@ class Build extends React.Component<any, any> {
             //first row, only connectors down
             connectorDownActive = [SELECTED, SELECTABLE].includes(
               buildState[rowIndex + 1][columnIndex]
-            )
-              ? true
-              : false;
-            if (columnIndex == 0) {
+            );
+            if (columnIndex === 0) {
               // only check up right
               connectorDownRightActive = [SELECTED, SELECTABLE].includes(
                 buildState[rowIndex + 1][columnIndex + 1]
               );
-            } else if (columnIndex == buildState[rowIndex].length - 1) {
+            } else if (columnIndex === buildState[rowIndex].length - 1) {
               connectorDownLeftActive = [SELECTED, SELECTABLE].includes(
                 buildState[rowIndex + 1][columnIndex - 1]
               );
@@ -435,16 +714,14 @@ class Build extends React.Component<any, any> {
             // last row, only connectors up
             connectorUpActive = [SELECTED].includes(
               buildState[rowIndex - 1][columnIndex]
-            )
-              ? true
-              : false;
+            );
 
-            if (columnIndex == 0) {
+            if (columnIndex === 0) {
               // only check up right
               connectorUpRightActive = [SELECTED].includes(
                 buildState[rowIndex - 1][columnIndex + 1]
               );
-            } else if (columnIndex == buildState[rowIndex].length - 1) {
+            } else if (columnIndex === buildState[rowIndex].length - 1) {
               connectorUpLeftActive = [SELECTED].includes(
                 buildState[rowIndex - 1][columnIndex - 1]
               );
@@ -467,7 +744,7 @@ class Build extends React.Component<any, any> {
               buildState[rowIndex + 1][columnIndex]
             );
 
-            if (columnIndex == 0) {
+            if (columnIndex === 0) {
               // only check up right
               connectorUpRightActive = [SELECTED].includes(
                 buildState[rowIndex - 1][columnIndex + 1]
@@ -475,7 +752,7 @@ class Build extends React.Component<any, any> {
               connectorDownRightActive = [SELECTED, SELECTABLE].includes(
                 buildState[rowIndex + 1][columnIndex + 1]
               );
-            } else if (columnIndex == buildState[rowIndex].length - 1) {
+            } else if (columnIndex === buildState[rowIndex].length - 1) {
               // only check up left
               connectorUpLeftActive = [SELECTED].includes(
                 buildState[rowIndex - 1][columnIndex - 1]
@@ -517,12 +794,40 @@ class Build extends React.Component<any, any> {
       </Row>
     ));
     return (
-      <Container
-        fluid
-        style={{ minWidth: "770px", border: "1px solid rgb(39, 36, 30)" }}
+      <Row
+        style={{
+          borderRight: "1px solid grey",
+          borderLeft: "1px solid grey",
+          borderBottom: "1px solid grey",
+        }}
       >
-        {rows.map((row) => row)}
-      </Container>
+        <Col
+          lg={12}
+          style={{
+            backgroundImage:
+              "url(https://media.newworlddocs.com/icons/bgs/blurdark.png)",
+          }}
+        >
+          <Row style={{ borderBottom: "1px solid grey", paddingTop: "4vh" }}>
+            <Col lg={12}>
+              <h1
+                style={{
+                  color: "var(--gold)",
+                  fontFamily: "IM Fell DW Pica",
+                  textAlign: "center",
+                }}
+              >
+                {this.props.buildConfig.heading}
+              </h1>
+            </Col>
+          </Row>
+          <Row style={{ padding: 0 }}>
+            <Col lg={12} style={{ padding: 0 }}>
+              {rows.map((row) => row)}
+            </Col>
+          </Row>
+        </Col>
+      </Row>
     );
   }
 }
@@ -536,7 +841,7 @@ const ConnectorUp = (props) => {
         width: "1px",
         height: "50%",
         left: "50%",
-        zIndex: -20,
+        zIndex: 2,
         top: 0,
       }}
     />
@@ -550,7 +855,7 @@ const ConnectorDown = (props) => (
       width: "1px",
       height: "50%",
       left: "50%",
-      zIndex: -10,
+      zIndex: 2,
       bottom: 0,
     }}
   />
@@ -565,7 +870,7 @@ const ConnectorUpLeft = (props) => (
       width: "50%",
       height: "51%",
       right: "50%",
-      zIndex: -20,
+      zIndex: 2,
       top: "-3%",
     }}
   />
@@ -580,7 +885,7 @@ const ConnectorUpRight = (props) => (
       width: "50%",
       height: "50%",
       left: "50%",
-      zIndex: -20,
+      zIndex: 2,
       top: 0,
     }}
   />
@@ -595,7 +900,7 @@ const ConnectorDownRight = (props) => (
       width: "50%",
       height: "50%",
       left: "50%",
-      zIndex: -20,
+      zIndex: "moveZUnder" in props && props.moveZUnder ? 1 : 2,
       top: "50%",
     }}
   />
@@ -610,7 +915,7 @@ const ConnectorDownLeft = (props) => (
       width: "50%",
       height: "50%",
       left: "50%",
-      zIndex: -20,
+      zIndex: 2,
       top: "47%",
     }}
   />
@@ -619,16 +924,36 @@ const ConnectorDownLeft = (props) => (
 let Connector = (props) => {
   console.log(props);
   return {
-    up: () => <ConnectorUp active={props.connectorUpActive} />,
+    up: () => (
+      <ConnectorUp
+        active={props.connectorUpActive && props.cellType != DISABLED}
+      />
+    ),
     down: () => <ConnectorDown active={props.connectorDownActive} />,
-    upRight: () => <ConnectorUpRight active={props.connectorUpRightActive} />,
-    upLeft: () => <ConnectorUpLeft active={props.connectorUpLeftActive} />,
+    upRight: () => (
+      <ConnectorUpRight
+        active={props.connectorUpRightActive && props.cellType != DISABLED}
+      />
+    ),
+    upLeft: () => (
+      <ConnectorUpLeft
+        active={props.connectorUpLeftActive && props.cellType != DISABLED}
+      />
+    ),
     downLeft: () => (
       <ConnectorDownLeft active={props.connectorDownLeftActive} />
     ),
-    downRight: () => (
-      <ConnectorDownRight active={props.connectorDownRightActive} />
-    ),
+    downRight: () => {
+      if (props.connectorDownActive && !props.connectorDownRightActive) {
+        return (
+          <ConnectorDownRight
+            moveZUnder={true}
+            active={props.connectorDownRightActive}
+          />
+        );
+      }
+      return <ConnectorDownRight active={props.connectorDownRightActive} />;
+    },
   };
 };
 
@@ -646,6 +971,7 @@ const ItemCell = (props) => {
         border: activeBorder,
         margin: "auto",
         backgroundImage: `url(${props.item.background})`,
+        zIndex: 3,
       };
       break;
     case SELECTABLE:
@@ -653,6 +979,7 @@ const ItemCell = (props) => {
         border: inactiveBorder,
         margin: "auto",
         backgroundImage: `url(${props.item.background})`,
+        zIndex: 3,
       };
       break;
     case DISABLED:
@@ -660,6 +987,7 @@ const ItemCell = (props) => {
         border: "2px solid grey",
         margin: "auto",
         backgroundColor: "black",
+        zIndex: 3,
       };
       break;
     default:
@@ -667,11 +995,12 @@ const ItemCell = (props) => {
         border: props.item.active ? activeBorder : inactiveBorder,
         margin: "auto",
         backgroundImage: `url(${props.item.background})`,
+        zIndex: 3,
       };
       break;
   }
   if (objectIsEmpty(props.item)) {
-    return <Col style={{ width: "128px", height: "128px" }} />;
+    return <Col style={{ width: "96px", height: "96px" }} />;
   }
 
   let connectors = [];
@@ -689,30 +1018,34 @@ const ItemCell = (props) => {
             alignItems: "center",
             display: "flex",
             position: "relative",
+            width: "96px",
           }}
         >
           {connectors}
           <OverlayTrigger
-            placement={"left"}
-            trigger={["hover", "click"]}
+            placement={props.columnIndex > 2 ? "left" : "right"}
+            trigger={["hover"]}
             overlay={<MovePopover item={props.item} />}
           >
             <div
               className={"hover-move-expand"}
               style={{
                 ...itemStyle,
-                width: "96px",
-                height: "96px",
+                width: "80px",
+                height: "80px",
                 backgroundColor: "black",
               }}
             >
-              <img
-                src={props.item.detail}
-                style={{
-                  width: "100%",
-                  height: "100%",
-                }}
-              />
+              <div style={{ opacity: props.cellType == DISABLED ? 0.4 : 1 }}>
+                <img
+                  alt={"move"}
+                  src={props.item.detail}
+                  style={{
+                    width: "100%",
+                    height: "100%",
+                  }}
+                />
+              </div>
             </div>
           </OverlayTrigger>
         </Col>
@@ -724,12 +1057,12 @@ const ItemCell = (props) => {
             alignItems: "center",
             display: "flex",
             position: "relative",
+            width: "96px",
           }}
         >
           {connectors}
         </Col>
       );
-
     case "passive":
       return (
         <Col
@@ -741,7 +1074,7 @@ const ItemCell = (props) => {
         >
           {connectors}
           <OverlayTrigger
-            placement="right"
+            placement={props.columnIndex > 2 ? "left" : "right"}
             trigger={"hover"}
             overlay={<MovePopover item={props.item} />}
           >
@@ -755,14 +1088,57 @@ const ItemCell = (props) => {
                 backgroundColor: "black",
               }}
             >
-              <img
-                src={props.item.detail}
-                style={{
-                  left: "-2",
-                  width: "100%",
-                  height: "100%",
-                }}
-              />
+              <div style={{ opacity: props.cellType == DISABLED ? 0.4 : 1 }}>
+                <img
+                  alt={"passive"}
+                  src={props.item.detail}
+                  style={{
+                    left: "-2",
+                    width: "100%",
+                    height: "100%",
+                  }}
+                />
+              </div>
+            </div>
+          </OverlayTrigger>
+        </Col>
+      );
+    case "final":
+      return (
+        <Col
+          style={{
+            alignItems: "center",
+            display: "flex",
+            position: "relative",
+          }}
+        >
+          {connectors}
+          <OverlayTrigger
+            placement={props.columnIndex > 2 ? "left" : "right"}
+            trigger={"hover"}
+            overlay={<MovePopover item={props.item} />}
+          >
+            <div
+              className={"hover-move-expand"}
+              style={{
+                ...itemStyle,
+                width: "80px",
+                height: "80px",
+                borderRadius: "50%",
+                backgroundColor: "black",
+              }}
+            >
+              <div style={{ opacity: props.cellType == DISABLED ? 0.4 : 1 }}>
+                <img
+                  alt={"passive"}
+                  src={props.item.detail}
+                  style={{
+                    left: "-2",
+                    width: "100%",
+                    height: "100%",
+                  }}
+                />
+              </div>
             </div>
           </OverlayTrigger>
         </Col>
@@ -772,20 +1148,23 @@ const ItemCell = (props) => {
         <Col>
           <div
             style={{
-              width: "128px",
-              height: "128px",
+              width: "64px",
+              height: "64px",
               backgroundImage: `url(${props.item.background})`,
               margin: "auto",
               border: "1px solid white",
             }}
           >
-            <img
-              src={props.item.detail}
-              style={{
-                width: "128px",
-                height: "128px",
-              }}
-            />
+            <div style={{ opacity: props.cellType == DISABLED ? 0.4 : 1 }}>
+              <img
+                alt={"default"}
+                src={props.item.detail}
+                style={{
+                  width: "100%",
+                  height: "100%",
+                }}
+              />
+            </div>
           </div>
         </Col>
       );

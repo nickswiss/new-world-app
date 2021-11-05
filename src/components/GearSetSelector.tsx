@@ -1,4 +1,4 @@
-import React, { ChangeEvent, useState } from "react";
+import React, { ChangeEvent } from "react";
 import { Col, Dropdown, FormControl, Row } from "react-bootstrap";
 import DisplayIcon from "./DisplayIcon";
 import Fuse from "fuse.js";
@@ -11,7 +11,7 @@ type ICustomToggleProps = {
 const CustomToggle = React.forwardRef(
   (props: ICustomToggleProps, ref: React.Ref<HTMLAnchorElement>) => (
     <a
-      href=""
+      href="something"
       ref={ref}
       onClick={(e) => {
         e.preventDefault();
