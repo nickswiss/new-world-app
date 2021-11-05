@@ -617,7 +617,7 @@ class Builds extends React.Component<any, any> {
               "https://media.newworlddocs.com/icons/abilities/abilities_bg_passive0.png",
             type: "passive",
 
-            name: "Speed of Light1",
+            name: "Speed of Light",
             description:
               "When Beacon heals a target it also applies 20% Haste for 4s. (Haste increases movement speed.)",
             connectors: ["up"],
@@ -926,18 +926,18 @@ let Connector = (props) => {
   return {
     up: () => (
       <ConnectorUp
-        active={props.connectorUpActive && props.cellType != DISABLED}
+        active={props.connectorUpActive && props.cellType !== DISABLED}
       />
     ),
     down: () => <ConnectorDown active={props.connectorDownActive} />,
     upRight: () => (
       <ConnectorUpRight
-        active={props.connectorUpRightActive && props.cellType != DISABLED}
+        active={props.connectorUpRightActive && props.cellType !== DISABLED}
       />
     ),
     upLeft: () => (
       <ConnectorUpLeft
-        active={props.connectorUpLeftActive && props.cellType != DISABLED}
+        active={props.connectorUpLeftActive && props.cellType !== DISABLED}
       />
     ),
     downLeft: () => (
@@ -1036,7 +1036,7 @@ const ItemCell = (props) => {
                 backgroundColor: "black",
               }}
             >
-              <div style={{ opacity: props.cellType == DISABLED ? 0.4 : 1 }}>
+              <div style={{ opacity: props.cellType === DISABLED ? 0.4 : 1 }}>
                 <img
                   alt={"move"}
                   src={props.item.detail}
@@ -1088,7 +1088,7 @@ const ItemCell = (props) => {
                 backgroundColor: "black",
               }}
             >
-              <div style={{ opacity: props.cellType == DISABLED ? 0.4 : 1 }}>
+              <div style={{ opacity: props.cellType === DISABLED ? 0.4 : 1 }}>
                 <img
                   alt={"passive"}
                   src={props.item.detail}
@@ -1128,7 +1128,7 @@ const ItemCell = (props) => {
                 backgroundColor: "black",
               }}
             >
-              <div style={{ opacity: props.cellType == DISABLED ? 0.4 : 1 }}>
+              <div style={{ opacity: props.cellType === DISABLED ? 0.4 : 1 }}>
                 <img
                   alt={"passive"}
                   src={props.item.detail}
@@ -1155,7 +1155,7 @@ const ItemCell = (props) => {
               border: "1px solid white",
             }}
           >
-            <div style={{ opacity: props.cellType == DISABLED ? 0.4 : 1 }}>
+            <div style={{ opacity: props.cellType === DISABLED ? 0.4 : 1 }}>
               <img
                 alt={"default"}
                 src={props.item.detail}
