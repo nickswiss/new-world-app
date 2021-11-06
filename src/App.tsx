@@ -34,7 +34,6 @@ class App extends React.Component<any, any> {
             <Route exact path="/gear-sets" component={GearSet} />
             <Route exact path="/builds" component={Builds} />
             <Route exact path="/farming-routes/:id" component={FarmingRoute} />
-            <Route path="/sitemap.xml" />
           </Switch>
         </ConnectedRouter>
       </Container>

@@ -649,16 +649,24 @@ class Builds extends React.Component<any, any> {
   render() {
     return (
       <Container fluid>
-        <Row
-          style={{
-            padding: "2vh",
-          }}
-        >
-          <Col sm={12} lg={6}>
+        <Row>
+          <Col
+            sm={12}
+            lg={6}
+            style={{
+              padding: "2vh",
+            }}
+          >
             <Build buildConfig={this.buildConfig.one} />
           </Col>
 
-          <Col sm={12} lg={6}>
+          <Col
+            sm={12}
+            lg={6}
+            style={{
+              padding: "2vh",
+            }}
+          >
             <Build buildConfig={this.buildConfig.two} />
           </Col>
         </Row>
@@ -668,6 +676,13 @@ class Builds extends React.Component<any, any> {
 }
 
 class Build extends React.Component<any, any> {
+  onSelect(rowIndex, columnIndex) {
+    console.log("rowIndex");
+    console.log(rowIndex);
+    console.log("columnIndex");
+    console.log(columnIndex);
+  }
+
   render() {
     let buildState = this.props.buildConfig.buildState;
     let rows = this.props.buildConfig.build.map((row, rowIndex) => (
@@ -778,6 +793,7 @@ class Build extends React.Component<any, any> {
           }
           return (
             <ItemCell
+              onItemSelect={this.onSelect}
               connectorUpActive={connectorUpActive}
               connectorDownActive={connectorDownActive}
               connectorDownLeftActive={connectorDownLeftActive}
@@ -1024,7 +1040,7 @@ const ItemCell = (props) => {
           {connectors}
           <OverlayTrigger
             placement={props.columnIndex > 2 ? "left" : "right"}
-            trigger={["hover"]}
+            trigger={["hover", "focus"]}
             overlay={<MovePopover item={props.item} />}
           >
             <div
@@ -1038,6 +1054,9 @@ const ItemCell = (props) => {
             >
               <div style={{ opacity: props.cellType === DISABLED ? 0.4 : 1 }}>
                 <img
+                  onClick={(e) =>
+                    props.onItemSelect(props.rowIndex, props.columnIndex)
+                  }
                   alt={"move"}
                   src={props.item.detail}
                   style={{
@@ -1075,7 +1094,7 @@ const ItemCell = (props) => {
           {connectors}
           <OverlayTrigger
             placement={props.columnIndex > 2 ? "left" : "right"}
-            trigger={"hover"}
+            trigger={["hover", "focus"]}
             overlay={<MovePopover item={props.item} />}
           >
             <div
@@ -1115,7 +1134,7 @@ const ItemCell = (props) => {
           {connectors}
           <OverlayTrigger
             placement={props.columnIndex > 2 ? "left" : "right"}
-            trigger={"hover"}
+            trigger={["hover", "focus"]}
             overlay={<MovePopover item={props.item} />}
           >
             <div
